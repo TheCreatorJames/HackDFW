@@ -1,6 +1,8 @@
 var speed = [];
 var acceleration = [];
-    
+var steeringWheel = [];
+var callbacks = [];
+
 // simulation variables
 var simulationStartIndex = 200;
 var simulationSecondIndex = simulationStartIndex;
@@ -16,7 +18,6 @@ var maxAcceleration = 0;
 function init()
 {
     var fileInput = document.getElementById('fileInput');
-    var fileDisplayArea = document.getElementById('fileDisplayArea');
 
     fileInput.addEventListener('change', function(e)
     {
@@ -29,7 +30,6 @@ function init()
 
             reader.onload = function(e)
             {
-                fileDisplayArea.innerText = "File data is parsing...\n";
                 var fileText = reader.result;
                 var lines = fileText.split('\n');
 
@@ -51,19 +51,40 @@ function init()
                 maxAcceleration = acceleration[0];
 
 
-                fileDisplayArea.innerText += "Parsing complete...\n";
-
                 // after parsing data, start simulation
-                setInterval('simulate(fileDisplayArea)', 100);
+                setInterval('simulate()', 100);
             }
             reader.readAsText(file);
         }else
         {
-            fileDisplayArea.innerText = "File type not supported." + file.type;
+            alert("File type not supported.");
         }
 
     }
     );
+}
+
+function addCallback(callback)
+{
+    callbacks.push(callback);
+}
+
+function executeCallbacks()
+{
+    callbacks.forEach(function(v) 
+    {
+        v();
+    });
+}
+
+function getSimulationSecond()
+{
+    return simulationSecondIndex;
+}
+
+function getSteeringWheelAngle(second)
+{
+    return steeringWheel[second];
 }
 
 function getAcceleration(secondIndex)
@@ -112,12 +133,11 @@ function parseLine(data)
 
     // extract needed data
     speed.push(parseFloat(tokens[8]));
+    steeringWheel.push(tokens[12]);
 }
 
 function simulate(display)
 {
-    display.innerText += 'Speed: ' + getSpeed(simulationSecondIndex) + ' Avg speed: ' + getAverageSpeed() + ' Min speed: ' + getMinSpeed() + ' Max speed: ' + getMaxSpeed() + ' Acceleration: ' + getAcceleration(simulationSecondIndex) + '\n';
-
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
     
@@ -125,7 +145,6 @@ function simulate(display)
         minSpeed = speed;
     if(speed > maxSpeed)
         maxSpeed = speed;
-
     speedSum += speed;
 
     if(acceleration < minAcceleration)
@@ -133,6 +152,8 @@ function simulate(display)
     if(acceleration > maxAcceleration)
         maxAcceleration = acceleration;
     accelerationSum += acceleration;
-    
+
     simulationSecondIndex++;
+
+    executeCallbacks();
 }
