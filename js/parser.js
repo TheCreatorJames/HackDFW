@@ -149,6 +149,9 @@ function unload()
         speed.splice(0, 5490);
         acceleration.splice(0, 5490);
         steeringWheel.splice(0, 5490);
+        lat.splice(0, 5490);
+        lon.splice(0, 5490);
+
         unloaded += 5490;
     }
 }
@@ -176,6 +179,16 @@ function getAverageAcceleration()
 function getMinAcceleration()
 {
     return minAcceleration;
+}
+
+function getLongitude(second)
+{
+    return lon[getPosition(second)];
+}
+
+function getLatitude(second)
+{
+    return lat[getPosition(second)];
 }
 
 function getMaxAcceleration()
@@ -211,9 +224,9 @@ function parseLine(data)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
 
     speed.push(lastSpeed);
-    steeringWheel.push(tokens[arrayOffsets["angle"]]);
-    lat.push(tokens[arrayOffsets['latitude']]);
-    lon.push(tokens[arrayOffsets['longitude']]);
+    steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
+    lat.push(parseFloat(tokens[arrayOffsets['latitude']]));
+    lon.push(parseFloat(tokens[arrayOffsets['longitude']]));
 }
 
 var mut = 0;
