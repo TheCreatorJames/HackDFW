@@ -4,7 +4,7 @@ var steeringWheel = [];
 var callbacks = [];
 
 // simulation variables
-var simulationStartIndex = 200;
+var simulationStartIndex = 700;
 var simulationSecondIndex = simulationStartIndex;
 
 var speedSum = 0;
