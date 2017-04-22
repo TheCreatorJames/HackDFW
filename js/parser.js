@@ -8,8 +8,8 @@ var simulationStartIndex = 200;
 var simulationSecondIndex = simulationStartIndex;
 
 var speedSum = 0;
-var maxSpeed = 0;
-var minSpeed = 0;
+var maxSpeed = null;
+var minSpeed = null;
 
 var accelerationSum = 0;
 var minAcceleration = 0;
@@ -24,7 +24,7 @@ function init()
         var file = fileInput.files[0];
         var textType = "vnd.ms-excel";
 
-        if(file.type.match(textType))
+        if (file.type.match(textType))
         {
             var reader = new FileReader();
 
@@ -33,35 +33,61 @@ function init()
                 var fileText = reader.result;
                 var lines = fileText.split('\n');
 
-                var DATA_COUNT = 1000;
+                var MAX_COUNT = 500;
 
-                // discard first line of input
-                for(var i = 1; i < DATA_COUNT; i++)
+                var DATA_COUNT = lines.length;
+                var i = 1;
+
+                function asyncRead()
                 {
-                    var line = lines[i];
-                    parseLine(line);
+                    var count = 0;
+                    var j = i;
+                    // discard first line of input
+                    for (i = i; i < DATA_COUNT; i++)
+                    {
+                        var line = lines[i];
+                        parseLine(line);
+
+                        if (count++ == MAX_COUNT)
+                        {
+                            setTimeout(asyncRead, 100);
+                            break;
+                        }
+                    }
+
+                    count = 0;
+                    // calculate acceleration
+                    for (j = j; j < DATA_COUNT; j++)
+                    {
+                        acceleration.push(speed[j] - speed[j - 1]);
+
+                        if (count++ == MAX_COUNT)
+                        {
+                            break;
+                        }
+                    }
+                    if (minSpeed == null)
+                    {
+                        minSpeed = speed[0];
+                        maxSpeed = speed[0];
+                        minAcceleration = acceleration[0];
+                        maxAcceleration = acceleration[0];
+                    }
                 }
 
-                // calculate acceleration
-                for(var i = 1; i < DATA_COUNT; i++)
-                    acceleration[i] = (speed[i] - speed[i-1]);
-                minSpeed = speed[0];
-                maxSpeed = speed[0];
-                minAcceleration = acceleration[0];
-                maxAcceleration = acceleration[0];
-
+                asyncRead();
 
                 // after parsing data, start simulation
                 setInterval('simulate()', 100);
             }
             reader.readAsText(file);
-        }else
+        }
+        else
         {
             alert("File type not supported.");
         }
 
-    }
-    );
+    });
 }
 
 function addCallback(callback)
@@ -71,7 +97,7 @@ function addCallback(callback)
 
 function executeCallbacks()
 {
-    callbacks.forEach(function(v) 
+    callbacks.forEach(function(v)
     {
         v();
     });
@@ -114,7 +140,7 @@ function getSpeed(secondIndex)
 
 function getAverageSpeed()
 {
-    return speedSum / (simulationSecondIndex-simulationStartIndex);
+    return speedSum / (simulationSecondIndex - simulationStartIndex);
 }
 
 function getMaxSpeed()
@@ -140,16 +166,16 @@ function simulate(display)
 {
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
-    
-    if(speed < minSpeed)
+
+    if (speed < minSpeed)
         minSpeed = speed;
-    if(speed > maxSpeed)
+    if (speed > maxSpeed)
         maxSpeed = speed;
     speedSum += speed;
 
-    if(acceleration < minAcceleration)
+    if (acceleration < minAcceleration)
         minAcceleration = acceleration;
-    if(acceleration > maxAcceleration)
+    if (acceleration > maxAcceleration)
         maxAcceleration = acceleration;
     accelerationSum += acceleration;
 
