@@ -78,7 +78,7 @@ function init()
                 asyncRead();
 
                 // after parsing data, start simulation
-                setInterval('simulate()', 10);
+                setInterval('simulate()', 100);
             }
             reader.readAsText(file);
         }
