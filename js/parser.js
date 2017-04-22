@@ -1,6 +1,8 @@
 var speed = [];
 var acceleration = [];
 var steeringWheel = [];
+var lat = [];
+var lon = [];
 var callbacks = [];
 
 var arrayOffsets = {};
@@ -54,10 +56,17 @@ function init()
                     {
                         arrayOffsets["angle"] = k;
                     }
-
                     if (lineVals[k] == "Vehicle_Speed")
                     {
                         arrayOffsets["speed"] = k;
+                    }
+                    if(lineVals[k] == "latitude")
+                    {
+                        arrayOffsets['latitude'] = k;
+                    }
+                    if(lineVals[k] == 'longitude')
+                    {
+                        arrayOffsets['longitude'] = k;
                     }
                 }
 
@@ -79,6 +88,7 @@ function init()
                     }
 
                     count = 0;
+
                     // calculate acceleration
                     for (j = j; j < DATA_COUNT; j++)
                     {
@@ -89,6 +99,7 @@ function init()
                             break;
                         }
                     }
+
                     if (minSpeed == null)
                     {
                         minSpeed = speed[0];
@@ -201,10 +212,17 @@ function parseLine(data)
 
     speed.push(lastSpeed);
     steeringWheel.push(tokens[arrayOffsets["angle"]]);
+    lat.push(tokens[arrayOffsets['latitude']]);
+    lon.push(tokens[arrayOffsets['longitude']]);
 }
 
-function simulate(display)
+var mut = 0;
+function simulate(q)
 {
+    if(q)
+        if(q > 0) return;
+
+
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
 
@@ -224,5 +242,8 @@ function simulate(display)
     unload();
     executeCallbacks();
 
-    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate() }, Math.max(1000 / simulationSpeed, 10));
+    var qr=mut;
+    if(mut > 0) mut--;
+    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate(qr); }, Math.max(1000 / simulationSpeed, 10));
+    mut++;
 }
