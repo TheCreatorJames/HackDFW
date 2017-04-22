@@ -43,7 +43,7 @@ addCallback(function()
 {
     var currentSecond = getSimulationSecond();
     var wheel = getSteeringWheelAngle(currentSecond);
-    
+    if(!isNaN(wheel))
     wheelPieChart.options.rotation = (wheel*2) * Math.PI / 180 + 9.881;
     wheelPieChart.update();
 });
