@@ -5,7 +5,7 @@ var cMajor = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]
 var cPenta = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]
 window.addEventListener('keydown', function (e) {
   sineNote(0.5, 0)
-  brownNoise(0, 0)
+  noiseOn()
 })
 var sineNote = function (drivingSpeed, moduloValue) {
   var oscillator = audiocntx.createOscillator()
@@ -35,4 +35,10 @@ var brownNoise = (function () {
   return node
 })()
 
-// brownNoise.connect(audiocntx.destination)
+var noiseOn = function () {
+  brownNoise.connect(audiocntx.destination)
+  var gainNode = audiocntx.createGain()
+  gainNode.gain.value = 0.5
+  gainNode.connect(audiocntx.destination)
+  gainNode.gain.setTargetAtTime(0.001, audiocntx.currentTime + 2, 0.5)
+}
