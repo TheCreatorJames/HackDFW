@@ -321,13 +321,6 @@ function simulate(q)
     simulationSecondIndex++;
     unload();
 
-    var qr = 0;
-    if (q != 1)
-    {
-        mut++;
-        qr = mut;
-    }
-
 
     if(speed)
     {
@@ -338,6 +331,15 @@ function simulate(q)
         setTimeout(simulate, 100);
         return;
     }
+
+    var qr = 0;
+    if (q != 1)
+    {
+        mut++;
+        qr = mut;
+    }
+
+
 
 
     if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
