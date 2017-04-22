@@ -329,18 +329,18 @@ function simulate(q)
     }
 
 
-    var f = function()
-    {
-        for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
-        mut--;
-    };
 
-    if (unloaded >= DATA_COUNT - 5500)
-    {
 
-    }
+    if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
+    {}
     else
-        setTimeout(f, Math.max(1000 / simulationSpeed, 5));
+    {
+        setTimeout(function()
+        {
+            for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
+            mut--;
+        }, Math.max(1000 / simulationSpeed, 5));
 
-
+        executeCallbacks();
+    }
 }
