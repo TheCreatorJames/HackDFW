@@ -4,6 +4,7 @@ var steeringWheel = [];
 var lat = [];
 var lon = [];
 var callbacks = [];
+var brakes = [];
 
 var arrayOffsets = {};
 var lastSpeed = 0;
@@ -67,6 +68,11 @@ function init()
                     if (lineVals[k] == 'longitude')
                     {
                         arrayOffsets['longitude'] = k;
+                    }
+
+                    if (lineVals[k] == 'Brake_Control_Volume')
+                    {
+                        arrayOffsets['brake'] = k;
                     }
                 }
 
@@ -147,6 +153,7 @@ function unload()
     if (getPosition(getSimulationSecond()) > 5500)
     {
         speed.splice(0, 5490);
+        brakes.splice(0, 5490);
         acceleration.splice(0, 5490);
         steeringWheel.splice(0, 5490);
         lat.splice(0, 5490);
@@ -179,6 +186,11 @@ function getAverageAcceleration()
 function getMinAcceleration()
 {
     return minAcceleration;
+}
+
+function getBrake(second)
+{
+    return brakes[getPosition(second)];
 }
 
 function getLongitude(second)
@@ -227,6 +239,7 @@ function parseLine(data)
     steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
     lat.push(parseFloat(tokens[arrayOffsets['latitude']]));
     lon.push(parseFloat(tokens[arrayOffsets['longitude']]));
+    brakes.push(parseFloat(tokens[arrayOffsets['brake']]));
 }
 
 var mut = 0;
