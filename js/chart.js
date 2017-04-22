@@ -38,8 +38,8 @@ var accelerationOptions = {
         yAxes: [{
             display: true,
             ticks: {
-                min: -2,    // minimum will be 0, unless there is a lower value.
-                max: 2,
+                min: -10,    // minimum will be 0, unless there is a lower value.
+                max: 10,
             }
         }]
     }

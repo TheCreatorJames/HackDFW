@@ -4,7 +4,7 @@ var steeringWheel = [];
 var callbacks = [];
 
 // simulation variables
-var simulationStartIndex = 700;
+var simulationStartIndex = 300;
 var simulationSecondIndex = simulationStartIndex;
 
 var speedSum = 0;
@@ -78,7 +78,7 @@ function init()
                 asyncRead();
 
                 // after parsing data, start simulation
-                setInterval('simulate()', 100);
+                setInterval('simulate()', 10);
             }
             reader.readAsText(file);
         }
