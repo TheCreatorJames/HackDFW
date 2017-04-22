@@ -4,24 +4,17 @@ var wheelData = {
   datasets: [{
         data: [
             14,
-            4,
+            5,
             17,
-            4
+            5
         ],
         backgroundColor: [
-            "#FF6384",
-            "#4BC0C0",
-            "#FF6384",
-            "#4BC0C0"
+            "#888888",
+            "#777789",
+            "#888888",
+            "#777789"
         ],
-    }],
-    labels: [
-        "Red",
-        "Green",
-        "Yellow",
-        "Grey",
-        "Blue"
-    ]
+    }]
 };
 
 var wheelOptions = {
@@ -29,7 +22,7 @@ var wheelOptions = {
     {
         display: false
     },
-    rotation: 9.881
+    rotation: 9.9299999
 }
 
 var wheelPieChart = new Chart(ctx,
@@ -44,6 +37,6 @@ addCallback(function()
     var currentSecond = getSimulationSecond();
     var wheel = getSteeringWheelAngle(currentSecond);
     if(!isNaN(wheel))
-    wheelPieChart.options.rotation = (wheel*2) * Math.PI / 180 + 9.881;
+    wheelPieChart.options.rotation = (wheel*2) * Math.PI / 180 +9.92999999;
     wheelPieChart.update();
 });
