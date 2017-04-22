@@ -14,7 +14,7 @@ var sineNote = function (drivingSpeed, moduloValue) {
   gainNode.connect(audiocntx.destination)
   oscillator.connect(gainNode)
   oscillator.type = 'sine'
-  oscillator.frequency.value = cPenta[Math.floor((Math.random() * 8))]
+  oscillator.frequency.value = cPenta[Math.floor((Math.random() * 6))]
   oscillator.start()
   gainNode.gain.setTargetAtTime(0.001, audiocntx.currentTime + 2, 0.5)
   oscillator.stop(audiocntx.currentTime + 5)
