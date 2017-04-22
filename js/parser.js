@@ -329,6 +329,15 @@ function simulate(q)
     }
 
 
+    if(speed)
+    {
+    
+    }
+    else
+    {
+        setTimeout(simulate, 100);
+        return;
+    }
 
 
     if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
