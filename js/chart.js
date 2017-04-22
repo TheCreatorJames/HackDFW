@@ -54,7 +54,7 @@ addCallback(function()
     var speed = getSpeed(currentSecond);
     var acceleration = getAcceleration(currentSecond);
 
-    console.log(speed);
+  //  console.log(speed);
 
     velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
     velocityData.datasets[0].data.pop();
