@@ -1,8 +1,9 @@
  var lastCoord = null;
  var countMap = 0;
-
+var clearMap = null;
  function initMap()
  {
+    var local_lines = [];
      var uluru = {
          lat: -25.363,
          lng: 131.044
@@ -17,8 +18,15 @@
          position: uluru,
          map: map
      })
+     
 
+     clearMap = function() { local_lines.forEach(function(x)
+       {
+         x.setMap(null);
+       });
 
+        //local_lines = [];
+       }
      addCallback(function()
      {
          var currentSecond = getSimulationSecond();
@@ -35,7 +43,7 @@
                      uluru
                  ];
 
-
+                
                  var flightPath = new google.maps.Polyline(
                  {
                      path: flightPlanCoordinates,
@@ -44,8 +52,9 @@
                      strokeOpacity: 1.0,
                      strokeWeight: 2
                  });
-
+                  
                  flightPath.setMap(map);
+                 local_lines.push(flightPath);
              }
 
 

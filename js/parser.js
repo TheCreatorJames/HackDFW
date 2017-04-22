@@ -22,6 +22,7 @@ var minSpeed = null;
 
 var unloaded = 0;
 
+var DATA_COUNT = 0;
 var accelerationSum = 0;
 var minAcceleration = 0;
 var maxAcceleration = 0;
@@ -42,7 +43,6 @@ function init()
         steeringWheel = [];
         lat = [];
         lon = [];
-        callbacks = [];
         brakes = [];
 
         arrayOffsets = {};
@@ -70,6 +70,7 @@ function init()
 
         if (file.type.match(textType) || file.type.match("text/csv"))
         {
+            clearMap();
             var reader = new FileReader();
 
             reader.onload = function(e)
@@ -79,7 +80,7 @@ function init()
 
                 var MAX_COUNT = 1530;
 
-                var DATA_COUNT = lines.length;
+                DATA_COUNT = lines.length;
                 var i = 1;
 
                 var lineVals = lines[0].split(",");
@@ -308,11 +309,13 @@ function simulate(q)
         qr = mut;
     }
 
+    if( !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) ) 
     setTimeout(function()
     {
         for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
         mut--;
     }, Math.max(1000 / simulationSpeed, 10));
+
     executeCallbacks();
 
 }
