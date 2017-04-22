@@ -1,8 +1,7 @@
 var velocityCtx = document.getElementById("velocityDisplay");
 var accelerationCtx = document.getElementById("accelerationDisplay");
 
-var velocityData = 
-{
+var velocityData = {
     labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     datasets: [
     {
@@ -11,10 +10,10 @@ var velocityData =
         backgroundColor: "rgba(0,255,0,0.4)"
     }]
 };
-var accelerationData = 
-{
+var accelerationData = {
     labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    datasets: [{
+    datasets: [
+    {
         label: 'Acceleration',
         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(255,0,0,0.4)"
@@ -22,11 +21,14 @@ var accelerationData =
 }
 
 var velocityOptions = {
-    scales: {
-        yAxes: [{
+    scales:
+    {
+        yAxes: [
+        {
             display: true,
-            ticks: {
-                min: 0,   
+            ticks:
+            {
+                min: 0,
                 max: 120,
             }
         }]
@@ -34,19 +36,30 @@ var velocityOptions = {
 };
 
 var accelerationOptions = {
-    scales: {
-        yAxes: [{
+    scales:
+    {
+        yAxes: [
+        {
             display: true,
-            ticks: {
-                min: -10,    // minimum will be 0, unless there is a lower value.
+            ticks:
+            {
+                min: -10, // minimum will be 0, unless there is a lower value.
                 max: 10,
             }
         }]
     }
 };
 
-var velocityChart = Chart.Line(velocityCtx, {data: velocityData, options: velocityOptions});
-var accelerationChart = Chart.Line(accelerationCtx, {data: accelerationData, options: accelerationOptions});
+var velocityChart = Chart.Line(velocityCtx,
+{
+    data: velocityData,
+    options: velocityOptions
+});
+var accelerationChart = Chart.Line(accelerationCtx,
+{
+    data: accelerationData,
+    options: accelerationOptions
+});
 
 addCallback(function()
 {
@@ -54,18 +67,18 @@ addCallback(function()
     var speed = getSpeed(currentSecond);
     var acceleration = getAcceleration(currentSecond);
 
-  //  console.log(speed);
+    //  console.log(speed);
 
     velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
     velocityData.datasets[0].data.pop();
     velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
     velocityData.datasets[0].data.push(speed);
 
-    accelerationData.datasets[0].data =  accelerationData.datasets[0].data.reverse();
+    accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
     accelerationData.datasets[0].data.pop();
     accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
     accelerationData.datasets[0].data.push(acceleration);
-    
+
     velocityChart.update();
     accelerationChart.update();
 });

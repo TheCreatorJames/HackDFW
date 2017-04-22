@@ -3,9 +3,9 @@ function RGB()
     $("#meh").text("" + r.getValue());
     simulationSpeed = r.getValue();
 
-    if( 1000/simulationSpeed < 10 )
+    if (1000 / simulationSpeed < 10)
     {
-        simSpeedSkips = Math.floor(10/(1000/simulationSpeed));
+        simSpeedSkips = Math.floor(10 / (1000 / simulationSpeed));
     }
     else
     {
@@ -14,4 +14,5 @@ function RGB()
 
 }
 
-var r = $("#lol").slider({}).on('slide', RGB).data('slider');
+var r = $("#lol").slider(
+{}).on('slide', RGB).data('slider');

@@ -34,8 +34,8 @@ function init()
         var file = fileInput.files[0];
         var textType = "vnd.ms-excel";
 
-        if (file.type.match(textType))
-        {
+        if (file.type.match(textType) || file.type.match("text/csv"))
+        { 
             var reader = new FileReader();
 
             reader.onload = function(e)
@@ -60,11 +60,11 @@ function init()
                     {
                         arrayOffsets["speed"] = k;
                     }
-                    if(lineVals[k] == "latitude")
+                    if (lineVals[k] == "latitude")
                     {
                         arrayOffsets['latitude'] = k;
                     }
-                    if(lineVals[k] == 'longitude')
+                    if (lineVals[k] == 'longitude')
                     {
                         arrayOffsets['longitude'] = k;
                     }
@@ -230,11 +230,12 @@ function parseLine(data)
 }
 
 var mut = 0;
+
 function simulate(q)
 {
     var q = q || null;
 
-    if(q > 1) return;
+    if (q > 1) return;
 
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
@@ -256,12 +257,16 @@ function simulate(q)
     executeCallbacks();
 
     var qr = 0;
-    if(q != 1)
+    if (q != 1)
     {
         mut++;
         qr = mut;
     }
 
-    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate(qr); mut--; }, Math.max(1000 / simulationSpeed, 10));
-    
+    setTimeout(function()
+    {
+        for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
+        mut--;
+    }, Math.max(1000 / simulationSpeed, 10));
+
 }
