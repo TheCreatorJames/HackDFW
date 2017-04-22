@@ -315,12 +315,14 @@ function simulate(q)
         qr = mut;
     }
 
-    if( !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) )
+
+
+    if(typeof speed === 'undefined' || !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) )
     setTimeout(function()
     {
         for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
         mut--;
-    }, Math.max(1000 / simulationSpeed, 10));
+    }, Math.max(1000 / simulationSpeed, 20));
 
     executeCallbacks();
 

@@ -1,35 +1,44 @@
  var lastCoord = null;
  var countMap = 0;
-var clearMap = null;
+ var clearMap = null;
+ var markerPlaced = false;
+
  function initMap()
  {
-    var local_lines = [];
+     var local_lines = [];
      var uluru = {
-         lat: -25.363,
-         lng: 131.044
+         lat: 40,
+         lng: -98
      };
      var map = new google.maps.Map(document.getElementById('map'),
      {
-         zoom: 4,
+         zoom: 5,
          center: uluru
      });
-     var marker = new google.maps.Marker(
+
+     var marker = null;
+
+     clearMap = function()
      {
-         position: uluru,
-         map: map
-     })
-     
-
-     clearMap = function() { local_lines.forEach(function(x)
-       {
-         x.setMap(null);
-         lastCoord = null;
-       });
-
-        //local_lines = [];
-       }
+         local_lines.forEach(function(x)
+         {
+             x.setMap(null);
+             lastCoord = null;
+         });
+         local_lines = [];
+     }
      addCallback(function()
      {
+         if (!markerPlaced)
+         {
+             marker = new google.maps.Marker(
+             {
+                 position: uluru,
+                 map: map
+             });
+             markerPlaced = true;
+         }
+
          var currentSecond = getSimulationSecond();
          uluru.lng = getLongitude(currentSecond);
          uluru.lat = getLatitude(currentSecond);
@@ -44,7 +53,7 @@ var clearMap = null;
                      uluru
                  ];
 
-                
+
                  var flightPath = new google.maps.Polyline(
                  {
                      path: flightPlanCoordinates,
@@ -53,7 +62,7 @@ var clearMap = null;
                      strokeOpacity: 1.0,
                      strokeWeight: 2
                  });
-                  
+
                  flightPath.setMap(map);
                  local_lines.push(flightPath);
              }
@@ -61,6 +70,11 @@ var clearMap = null;
 
              lastCoord = JSON.parse(JSON.stringify(uluru));
          }
-         marker.setPosition(uluru);
+         try
+         {
+             marker.setPosition(uluru);
+         }
+         catch (ex)
+         {}
      });
  };
