@@ -23,6 +23,7 @@ var clearMap = null;
      clearMap = function() { local_lines.forEach(function(x)
        {
          x.setMap(null);
+         lastCoord = null;
        });
 
         //local_lines = [];
