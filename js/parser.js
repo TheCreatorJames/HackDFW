@@ -85,7 +85,7 @@ function init()
 
                 for (var k = 0; k < lineVals.length; k++)
                 {
-                    if (lineVals[k] == "Steering_Angle_Degree")
+                    if (lineVals[k] == "Steering_Angle_Degree" || lineVals[k] == "Streering_Angle_Degree")
                     {
                         arrayOffsets["angle"] = k;
                     }
