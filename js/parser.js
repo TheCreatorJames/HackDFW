@@ -1,16 +1,22 @@
-var vehicleSpeed = [];
+var speed = [];
+var acceleration = [];
     
 // simulation variables
 var simulationStartIndex = 200;
 var simulationSecondIndex = simulationStartIndex;
-var vehicleSpeedSum = 0;
 
+var speedSum = 0;
+var maxSpeed = 0;
+var minSpeed = 0;
+
+var accelerationSum = 0;
+var minAcceleration = 0;
+var maxAcceleration = 0;
 
 function init()
 {
     var fileInput = document.getElementById('fileInput');
     var fileDisplayArea = document.getElementById('fileDisplayArea');
-
 
     fileInput.addEventListener('change', function(e)
     {
@@ -36,10 +42,19 @@ function init()
                     parseLine(line);
                 }
 
+                // calculate acceleration
+                for(var i = 1; i < DATA_COUNT; i++)
+                    acceleration[i] = (speed[i] - speed[i-1]);
+                minSpeed = speed[0];
+                maxSpeed = speed[0];
+                minAcceleration = acceleration[0];
+                maxAcceleration = acceleration[0];
+
+
                 fileDisplayArea.innerText += "Parsing complete...\n";
 
                 // after parsing data, start simulation
-                setInterval(simulate, 1000);
+                setInterval('simulate(fileDisplayArea)', 100);
             }
             reader.readAsText(file);
         }else
@@ -51,14 +66,44 @@ function init()
     );
 }
 
-function getVehicleSpeed(secondIndex)
+function getAcceleration(secondIndex)
 {
-    return vehicleSpeed[secondIndex];
+    return acceleration[secondIndex];
 }
 
-function getAverageVehicleSpeed()
+function getAverageAcceleration()
 {
-    return vehicleSpeedSum / (simulationSecondIndex-simulationStartIndex);
+    return accelerationSum / (simulationSecondIndex - simulationStartIndex);
+}
+
+function getMinAcceleration()
+{
+    return minAcceleration;
+}
+
+function getMaxAcceleration()
+{
+    return maxAcceleration;
+}
+
+function getSpeed(secondIndex)
+{
+    return speed[secondIndex];
+}
+
+function getAverageSpeed()
+{
+    return speedSum / (simulationSecondIndex-simulationStartIndex);
+}
+
+function getMaxSpeed()
+{
+    return maxSpeed;
+}
+
+function getMinSpeed()
+{
+    return minSpeed;
 }
 
 function parseLine(data)
@@ -66,13 +111,28 @@ function parseLine(data)
     var tokens = data.split(',');
 
     // extract needed data
-    vehicleSpeed.push(parseFloat(tokens[8]));
+    speed.push(parseFloat(tokens[8]));
 }
 
-function simulate()
+function simulate(display)
 {
-    fileDisplayArea.innerText += getVehicleSpeed(simulationSecondIndex);
-    vehicleSpeedSum += getVehicleSpeed(simulationSecondIndex);
+    display.innerText += 'Speed: ' + getSpeed(simulationSecondIndex) + ' Avg speed: ' + getAverageSpeed() + ' Min speed: ' + getMinSpeed() + ' Max speed: ' + getMaxSpeed() + ' Acceleration: ' + getAcceleration(simulationSecondIndex) + '\n';
 
+    var speed = getSpeed(simulationSecondIndex);
+    var acceleration = getAcceleration(simulationSecondIndex);
+    
+    if(speed < minSpeed)
+        minSpeed = speed;
+    if(speed > maxSpeed)
+        maxSpeed = speed;
+
+    speedSum += speed;
+
+    if(acceleration < minAcceleration)
+        minAcceleration = acceleration;
+    if(acceleration > maxAcceleration)
+        maxAcceleration = acceleration;
+    accelerationSum += acceleration;
+    
     simulationSecondIndex++;
 }
