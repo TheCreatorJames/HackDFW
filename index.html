@@ -32,16 +32,34 @@
     <canvas style="max-width:500px; max-height: 500px; float: right;" id="accelerationDisplay" width="100" height="100"></canvas>
 
 
+    <br><br>
+    
+    <br><br>
+    <br><br>
+    <br><br>
     <p>
-        <b>G</b> <input type="text" id="lol" class="span2" value="" data-slider-min="0" data-slider-max="255" data-slider-step="1"
-            data-slider-value="128" data-slider-id="GC" id="G" data-slider-tooltip="hide" data-slider-handle="round" />
+         
+    <input type="text" id="lol" class="span2" value="" data-slider-min="1" data-slider-max="300" data-slider-step="1"
+            data-slider-value="5" data-slider-id="GC" id="G" data-slider-tooltip="hide" data-slider-handle="round" />
+            <label id="meh">5 </label>
     </p>
 
     <script>
 
         function RGB()
         {
-            console.log(r.getValue());
+            $("#meh").text("" + r.getValue());
+            simulationSpeed = r.getValue();
+
+            if( 1000/simulationSpeed < 10 )
+            {
+                simSpeedSkips = Math.floor(10/(1000/simulationSpeed));
+            }
+            else
+            {
+                simSpeedSkips = 1;
+            }
+
         }
 
         var r = $("#lol").slider({}).on('slide', RGB).data('slider');

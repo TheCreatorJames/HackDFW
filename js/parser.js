@@ -6,6 +6,9 @@ var callbacks = [];
 var arrayOffsets = {};
 var lastSpeed = 0;
 
+var simulationSpeed = 10;
+var simSpeedSkips = 1;
+
 // simulation variables
 var simulationStartIndex = 0;
 var simulationSecondIndex = simulationStartIndex;
@@ -98,7 +101,7 @@ function init()
                 asyncRead();
 
                 // after parsing data, start simulation
-                setInterval('simulate()', 100);
+                simulate();
             }
             reader.readAsText(file);
         }
@@ -220,4 +223,6 @@ function simulate(display)
     simulationSecondIndex++;
     unload();
     executeCallbacks();
+
+    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate() }, Math.max(1000 / simulationSpeed, 10));
 }
