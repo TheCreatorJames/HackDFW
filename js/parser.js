@@ -116,8 +116,9 @@ function init()
                     for (i = i; i < DATA_COUNT; i++)
                     {
                         var line = lines[getPosition(i)];
+                        try { 
                         parseLine(line);
-
+                        } catch(ex) {}
                         if (count++ == MAX_COUNT)
                         {
                             setTimeout(asyncRead, 100);
