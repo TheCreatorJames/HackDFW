@@ -9,7 +9,7 @@ var brakes = [];
 var arrayOffsets = {};
 var lastSpeed = 0;
 
-var simulationSpeed = 5;
+var simulationSpeed = 10;
 var simSpeedSkips = 1;
 
 // simulation variables
@@ -48,7 +48,7 @@ function init()
         arrayOffsets = {};
         lastSpeed = 0;
 
-        
+
         // simulation variables
         simulationStartIndex = 0;
         simulationSecondIndex = simulationStartIndex;
@@ -116,7 +116,7 @@ function init()
                     for (i = i; i < DATA_COUNT; i++)
                     {
                         var line = lines[getPosition(i)];
-                        try { 
+                        try {
                         parseLine(line);
                         } catch(ex) {}
                         if (count++ == MAX_COUNT)
@@ -298,6 +298,13 @@ function simulate(q)
         maxAcceleration = acceleration;
     accelerationSum += acceleration;
 
+    /*
+     * Chris's Tone Generation Stuff
+     */
+     if(simulationSecondIndex%10==0){
+       instrument.play('C')
+     }
+     /*END TONE GENERATION BUH BYE*/
     simulationSecondIndex++;
     unload();
 
@@ -308,7 +315,7 @@ function simulate(q)
         qr = mut;
     }
 
-    if( !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) ) 
+    if( !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) )
     setTimeout(function()
     {
         for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
