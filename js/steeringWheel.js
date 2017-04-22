@@ -25,9 +25,9 @@ var wheelData = {
 };
 
 var wheelOptions = {
-    elements: {
-            arc: {
-            }
+    legend:
+    {
+        display: false
     },
     rotation: 9.881
 }
@@ -44,9 +44,6 @@ addCallback(function()
     var currentSecond = getSimulationSecond();
     var wheel = getSteeringWheelAngle(currentSecond);
     
-
-    console.log(wheel);
-
     wheelPieChart.options.rotation = (wheel*2) * Math.PI / 180 + 9.881;
     wheelPieChart.update();
 });
