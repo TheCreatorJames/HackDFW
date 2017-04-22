@@ -312,11 +312,12 @@ function simulate(q)
     /*
      * Chris's Tone Generation Stuff
      */
-    if (simulationSecondIndex % 10 == 0)
-    {
-        instrument.play('C')
-    }
-    /*END TONE GENERATION BUH BYE*/
+     //currently working well for up to 136 multiplier
+     if(simulationSecondIndex%300===0){
+       instrument.play('CD')
+       shimmer.play('eg3|beg')
+     }
+     /*END TONE GENERATION BUH BYE*/
     simulationSecondIndex++;
     unload();
 
