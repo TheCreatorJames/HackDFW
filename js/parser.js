@@ -38,6 +38,14 @@ function init()
 
     fileInput.addEventListener('change', function(e)
     {
+
+        delete speed;
+        delete acceleration;
+        delete steeringWheel;
+        delete lat;
+        delete lon;
+        delete brakes;
+
         speed = [];
         acceleration = [];
         steeringWheel = [];
@@ -116,9 +124,12 @@ function init()
                     for (i = i; i < DATA_COUNT; i++)
                     {
                         var line = lines[getPosition(i)];
-                        try {
-                        parseLine(line);
-                        } catch(ex) {}
+                        try
+                        {
+                            parseLine(line);
+                        }
+                        catch (ex)
+                        {}
                         if (count++ == MAX_COUNT)
                         {
                             setTimeout(asyncRead, 100);
@@ -301,10 +312,11 @@ function simulate(q)
     /*
      * Chris's Tone Generation Stuff
      */
-     if(simulationSecondIndex%10==0){
-       instrument.play('C')
-     }
-     /*END TONE GENERATION BUH BYE*/
+    if (simulationSecondIndex % 10 == 0)
+    {
+        instrument.play('C')
+    }
+    /*END TONE GENERATION BUH BYE*/
     simulationSecondIndex++;
     unload();
 
@@ -316,14 +328,18 @@ function simulate(q)
     }
 
 
-
-    if(typeof speed === 'undefined' || !(unloaded >= DATA_COUNT - 5500 && speed.length == 0) )
-    setTimeout(function()
+    var f = function()
     {
         for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
         mut--;
-    }, Math.max(1000 / simulationSpeed, 20));
+    };
 
-    executeCallbacks();
+    if (unloaded >= DATA_COUNT - 5500)
+    {
+
+    }
+    else
+        setTimeout(f, Math.max(1000 / simulationSpeed, 5));
+
 
 }

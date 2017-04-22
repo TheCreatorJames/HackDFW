@@ -20,11 +20,13 @@
 
      clearMap = function()
      {
+         map.setZoom(12);
          local_lines.forEach(function(x)
          {
              x.setMap(null);
              lastCoord = null;
          });
+         delete local_lines;
          local_lines = [];
      }
      addCallback(function()
@@ -53,7 +55,7 @@
                      uluru
                  ];
 
-
+                 
                  var flightPath = new google.maps.Polyline(
                  {
                      path: flightPlanCoordinates,
@@ -71,9 +73,12 @@
              lastCoord = JSON.parse(JSON.stringify(uluru));
          }
          try
-         {
+         { 
+            
+
              marker.setPosition(uluru);
-         }
+             map.setCenter(marker.getPosition());
+          }
          catch (ex)
          {}
      });
