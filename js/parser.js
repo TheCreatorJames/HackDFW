@@ -3,13 +3,18 @@ var acceleration = [];
 var steeringWheel = [];
 var callbacks = [];
 
+var arrayOffsets = {};
+var lastSpeed = 0;
+
 // simulation variables
-var simulationStartIndex = 300;
+var simulationStartIndex = 0;
 var simulationSecondIndex = simulationStartIndex;
 
 var speedSum = 0;
 var maxSpeed = null;
 var minSpeed = null;
+
+var unloaded = 0;
 
 var accelerationSum = 0;
 var minAcceleration = 0;
@@ -33,10 +38,25 @@ function init()
                 var fileText = reader.result;
                 var lines = fileText.split('\n');
 
-                var MAX_COUNT = 500;
+                var MAX_COUNT = 1530;
 
                 var DATA_COUNT = lines.length;
                 var i = 1;
+
+                var lineVals = lines[0].split(",");
+
+                for (var k = 0; k < lineVals.length; k++)
+                {
+                    if (lineVals[k] == "Steering_Angle_Degree")
+                    {
+                        arrayOffsets["angle"] = k;
+                    }
+
+                    if (lineVals[k] == "Vehicle_Speed")
+                    {
+                        arrayOffsets["speed"] = k;
+                    }
+                }
 
                 function asyncRead()
                 {
@@ -45,7 +65,7 @@ function init()
                     // discard first line of input
                     for (i = i; i < DATA_COUNT; i++)
                     {
-                        var line = lines[i];
+                        var line = lines[getPosition(i)];
                         parseLine(line);
 
                         if (count++ == MAX_COUNT)
@@ -59,7 +79,7 @@ function init()
                     // calculate acceleration
                     for (j = j; j < DATA_COUNT; j++)
                     {
-                        acceleration.push(speed[j] - speed[j - 1]);
+                        acceleration.push(speed[getPosition(j)] - speed[getPosition(j - 1)]);
 
                         if (count++ == MAX_COUNT)
                         {
@@ -103,6 +123,22 @@ function executeCallbacks()
     });
 }
 
+function getPosition(i)
+{
+    return i - unloaded;
+}
+
+function unload()
+{
+    if (getPosition(getSimulationSecond()) > 5500)
+    {
+        speed.splice(0, 5490);
+        acceleration.splice(0, 5490);
+        steeringWheel.splice(0, 5490);
+        unloaded += 5490;
+    }
+}
+
 function getSimulationSecond()
 {
     return simulationSecondIndex;
@@ -110,12 +146,12 @@ function getSimulationSecond()
 
 function getSteeringWheelAngle(second)
 {
-    return steeringWheel[second];
+    return steeringWheel[getPosition(second)];
 }
 
 function getAcceleration(secondIndex)
 {
-    return acceleration[secondIndex];
+    return acceleration[getPosition(secondIndex)];
 }
 
 function getAverageAcceleration()
@@ -135,7 +171,7 @@ function getMaxAcceleration()
 
 function getSpeed(secondIndex)
 {
-    return speed[secondIndex];
+    return speed[getPosition(secondIndex)];
 }
 
 function getAverageSpeed()
@@ -157,9 +193,11 @@ function parseLine(data)
 {
     var tokens = data.split(',');
 
-    // extract needed data
-    speed.push(parseFloat(tokens[8]));
-    steeringWheel.push(tokens[12]);
+    if (tokens[arrayOffsets["speed"]].length != 0)
+        lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
+
+    speed.push(lastSpeed);
+    steeringWheel.push(tokens[arrayOffsets["angle"]]);
 }
 
 function simulate(display)
@@ -180,6 +218,6 @@ function simulate(display)
     accelerationSum += acceleration;
 
     simulationSecondIndex++;
-
+    unload();
     executeCallbacks();
 }
