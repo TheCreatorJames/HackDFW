@@ -25,7 +25,7 @@
          uluru.lng = getLongitude(currentSecond);
          uluru.lat = getLatitude(currentSecond);
 
-         if (countMap++ % 100 == 0)
+         if (countMap++ % 120 == 0)
          {
              if (lastCoord != null)
              {

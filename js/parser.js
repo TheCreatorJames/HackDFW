@@ -267,8 +267,7 @@ function simulate(q)
 
     simulationSecondIndex++;
     unload();
-    executeCallbacks();
-
+    
     var qr = 0;
     if (q != 1)
     {
@@ -281,5 +280,6 @@ function simulate(q)
         for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
         mut--;
     }, Math.max(1000 / simulationSpeed, 10));
+    executeCallbacks();
 
 }
