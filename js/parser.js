@@ -28,15 +28,48 @@ var maxAcceleration = 0;
 
 function init()
 {
+
+
+
+
+
     var fileInput = document.getElementById('fileInput');
 
     fileInput.addEventListener('change', function(e)
     {
+        speed = [];
+        acceleration = [];
+        steeringWheel = [];
+        lat = [];
+        lon = [];
+        callbacks = [];
+        brakes = [];
+
+        arrayOffsets = {};
+        lastSpeed = 0;
+
+        simulationSpeed = 10;
+        simSpeedSkips = 1;
+
+        // simulation variables
+        simulationStartIndex = 0;
+        simulationSecondIndex = simulationStartIndex;
+
+        speedSum = 0;
+        maxSpeed = null;
+        minSpeed = null;
+
+        unloaded = 0;
+
+        accelerationSum = 0;
+        minAcceleration = 0;
+        maxAcceleration = 0;
+
         var file = fileInput.files[0];
         var textType = "vnd.ms-excel";
 
         if (file.type.match(textType) || file.type.match("text/csv"))
-        { 
+        {
             var reader = new FileReader();
 
             reader.onload = function(e)
@@ -267,7 +300,7 @@ function simulate(q)
 
     simulationSecondIndex++;
     unload();
-    
+
     var qr = 0;
     if (q != 1)
     {
