@@ -219,9 +219,9 @@ function parseLine(data)
 var mut = 0;
 function simulate(q)
 {
-    if(q)
-        if(q > 0) return;
+    var q = q || null;
 
+    if(q > 1) return;
 
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
@@ -242,8 +242,13 @@ function simulate(q)
     unload();
     executeCallbacks();
 
-    var qr=mut;
-    if(mut > 0) mut--;
-    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate(qr); }, Math.max(1000 / simulationSpeed, 10));
-    mut++;
+    var qr = 0;
+    if(q != 1)
+    {
+        mut++;
+        qr = mut;
+    }
+
+    setTimeout(function(){ for(var m = 0; m < simSpeedSkips; m++) simulate(qr); mut--; }, Math.max(1000 / simulationSpeed, 10));
+    
 }
