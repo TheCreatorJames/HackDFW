@@ -9,7 +9,7 @@ var brakes = [];
 var arrayOffsets = {};
 var lastSpeed = 0;
 
-var simulationSpeed = 10;
+var simulationSpeed = 5;
 var simSpeedSkips = 1;
 
 // simulation variables
