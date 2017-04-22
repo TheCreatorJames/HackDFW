@@ -10,3 +10,10 @@ window.addEventListener('keydown', function (e) {
   instrument.play('[d2f2][ce][df]')
   console.log(char)
 })
+function repeatAfterMe (currentSpeed) {
+  if(currentSpeed===0){
+    return
+  }else{
+    instrument.play(EFGA,repeatAfterMe(currentSpeed))
+  }
+}
