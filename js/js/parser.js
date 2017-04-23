@@ -30,6 +30,8 @@ var accelerationSum = 0;
 var minAcceleration = 0;
 var maxAcceleration = 0;
 
+var fileReadFunction = null;
+
 var shortener = [
     ["Fuel_Consum", "fcon", "Fuel Consumption", function(x)
     {
@@ -200,12 +202,15 @@ function nullFixer(x, a)
     return a(x);
 }
 
+
+
 function init()
 {
-    var fileInput = document.getElementById('fileInput');
-
-    fileInput.addEventListener('change', function(e)
+   
+    (fileReadFunction = function(e)
     {
+
+         var fileInput =  e.target;
         delete everything;
         delete speed;
         delete acceleration;
@@ -555,15 +560,3 @@ function simulate(q)
         executeCallbacks();
     }
 }
-
-/*
- * Chris's Tone Generation Stuff
- */
-// setInterval(console.log(getSimulationSecond()),1000)
-setInterval(function()
-{
-    speedFunc(getSpeed(getSimulationSecond()))
-    bassFunc(getSpeed(getSimulationSecond()))
-    chordstabs(getSpeed(getSimulationSecond()))
-}, 1000);
-/*END TONE GENERATION BUH BYE*/

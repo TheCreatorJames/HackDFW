@@ -125,9 +125,32 @@
 
               </div>
 
+               <style>
+        #map {
+            margin: 24px;
+            height: 86vh;
+            width: 92%;
+        }
+        </style>
+
               <div class="col-sm-6 col-md-7 col-xs-12 right">
-                <div id="speaker"><img src="images/speaker.svg"></div>
-                <div id="charts-go-here"></div>
+               <!-- <div id="speaker"><img src="images/speaker.svg"></div>
+                <div id="charts-go-here"></div> -->
+
+    <div id="map"></div>
+    <script src="js/maps.js" type="text/javascript"></script>
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA23hEpAwuAOMxX4XkkvFsxrFvp1GvT0TY&callback=initMap"
+        type="text/javascript"></script>
+
+
+        <script>
+        replaceDash4();
+        init();
+
+        </script>
+
+
               </div>
       </div>
       </div>
