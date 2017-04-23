@@ -280,7 +280,7 @@ function parseLine(data)
 
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
-    
+
 
 
     speed.push(lastSpeed);
@@ -320,8 +320,8 @@ function simulate(q)
     //currently working well for up to 136 multiplier
     if (simulationSecondIndex % 300 === 0)
     {
-        instrument.play('CD')
-        shimmer.play('eg3|beg')
+        // instrument.play('CD')
+        // shimmer.play('eg3|beg')
     }
     /*END TONE GENERATION BUH BYE*/
     simulationSecondIndex++;
@@ -331,7 +331,7 @@ function simulate(q)
     {
         speed = [];
         asyncRead(false);
-        
+
     }
 
     var qr = 0;
@@ -348,11 +348,11 @@ function simulate(q)
     {}
     else
     {
-        
+
         if(qr == 1)
         setTimeout(function()
         {
-            for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
+            for (var m = 0; m < simSpeedSkips; m++) simulate(0);
 
             /*
             setTimeout(function()
@@ -368,7 +368,7 @@ function simulate(q)
             if(qr == 1) {
             mut = 0;
             simulate(0); }
-        }, Math.max(1000 / simulationSpeed, 1));
+        }, Math.max(1000 / simulationSpeed, 8));
 
         executeCallbacks();
     }
