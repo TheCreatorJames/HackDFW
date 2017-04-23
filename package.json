@@ -21,6 +21,8 @@
     "compression" : "*",
     "nedb": "*",
     "express": "*",
-    "bcrypt": "*"
+    "bcrypt": "*",
+    "passport": "*",
+    "session": "*"
   }
 }
