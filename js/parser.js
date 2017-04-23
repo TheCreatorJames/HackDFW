@@ -19,7 +19,7 @@ var simulationSecondIndex = simulationStartIndex;
 var speedSum = 0;
 var maxSpeed = null;
 var minSpeed = null;
-
+var asyncRead = null;
 var unloaded = 0;
 
 var DATA_COUNT = 0;
@@ -116,7 +116,7 @@ function init()
                     }
                 }
 
-                function asyncRead()
+                asyncRead = function()
                 {
                     var count = 0;
                     var j = i;
@@ -322,16 +322,6 @@ function simulate(q)
     unload();
 
 
-    if(speed)
-    {
-    
-    }
-    else
-    {
-        setTimeout(simulate, 100);
-        return;
-    }
-
     var qr = 0;
     if (q != 1)
     {
@@ -340,6 +330,10 @@ function simulate(q)
     }
 
 
+    if(typeof speed === "undefined")
+    {
+        asyncRead();
+    }
 
 
     if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
