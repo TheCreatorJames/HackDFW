@@ -95,13 +95,11 @@
 .main{
   text-align: center;
   margin-top:100px;
-  position: fixed;
   height: 100%;
 }
 @media(max-width:767px){
   .main{
     height: inherit;
-    margin-top:145px;
     width:100%;
   }
 }
@@ -116,9 +114,6 @@
   }
   #hide-mobile-2{
     display:none;
-  }
-  .main{
-    margin-top:30px;
   }
   .left{
   margin-top:30px;
@@ -148,7 +143,7 @@
   font-size: 24px;
   font-weight: 400;
   color: #c00000;
-  margin-top: 80px;
+  margin-top: 50px;
 }
 .travel-date{
   vertical-align: middle;
@@ -182,19 +177,55 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 
 /*Start of Tables*/
 .scrolling-things{
-  overflow: scroll;
-  width:340px;
+  overflow: hidden;
+  width:92%;
   display:inline-flex;
   border-bottom: 1px solid #252525;
   padding-bottom: 10px;
 }
+
 .mobile-scrolling-things{
-  overflow: scroll;
-  width:340px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width:80%;
+  height:170px;
   display:inline-flex;
   border-bottom: 1px solid #252525;
   padding-bottom: 10px;
 }
+
+
+
+@media(max-width:705px)
+{
+  .mobile-scrolling-things{
+    width: 457px;
+  }
+}
+
+@media(max-width:597px)
+{
+  .mobile-scrolling-things{
+    width: 355px;
+  }
+}
+
+@media(max-width:488px)
+{
+  .mobile-scrolling-things{
+    width: 280px;
+  }
+}
+
+
+@media(max-width:370px)
+{
+  .mobile-scrolling-things{
+    width: 185px;
+  }
+}
+
+
 .travel-data-table{
   width:100%;
   margin:20px 0;
@@ -235,20 +266,24 @@ text-align: center;
     margin-top: 10px;
     text-align: center;
   }
+  .travel-date{
+    margin-bottom:-15px;
+  }
   .data-col.data-things{
       padding:0;
-      margin: 0;
-      font-size:11px;
       width:100%;
       padding-left:10px;
+      display: inline-flex;
   }
   .travel-data-table{
     display: inline;
     padding:0;
     margin-right:10px;
+    margin-left: 10px;
   }
   .light-button{
-    margin:10px 0;
+    display:grid;
+    margin: 15px auto;
   }
 }
 
