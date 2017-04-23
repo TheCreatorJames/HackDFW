@@ -58,8 +58,8 @@ var shortener = [
     }],
     ["Driver_Window_State", "dws", "Driver Window State", function(x)
     {
-        if(x == "0") return "Unknown";
-        if(x == "1") return "Open";
+        if (x == "0") return "Unknown";
+        if (x == "1") return "Open";
         return "Closed";
     }],
     ["Fuel_Guage", "fg", "Fuel Gauge", function(x)
@@ -68,69 +68,137 @@ var shortener = [
     }],
     ["Rear_Fog_Light", "rfl", "Rear Fog Light", function(x)
     {
-        if(x == "0") return "Off";
+        if (x == "0") return "Off";
         return "On";
     }],
     ["Lounge_Illum_Light", "lil", "Lounge Illumination Light", function(x)
     {
-        if(x == "0") return "Off";
+        if (x == "0") return "Off";
         return "On";
     }],
     ["Front_Fog_Light", "ffl", "Front Fog Light", function(x)
     {
-        if(x == "0") return "Off";
+        if (x == "0") return "Off";
         return "On";
     }],
     ["Front_Dome_Light", "fdl", "Front Dome Light", function(x)
     {
-        if(x == "0") return "Off";
+        if (x == "0") return "Off";
         return "On";
     }],
     ["Slide_Roof", "sr", "Slide Roof", function(x)
     {
-        if(x == "2") return "Closed";
-        if(x == "1") return "Open";
+        if (x == "2") return "Closed";
+        if (x == "1") return "Open";
         return "Unknown";
     }],
     ["Passenger_Window_State", "pws", "Passenger Window State", function(x)
     {
-        if(x == "0") return "Closed";
-        if(x == "1") return "Open";
+        if (x == "0") return "Closed";
+        if (x == "1") return "Open";
         return "Unknown";
     }],
     ["RR_Window_State", "rrws", "Rear Right Window State", function(x)
     {
-        if(x == "0") return "Closed";
-        if(x == "1") return "Open";
+        if (x == "0") return "Closed";
+        if (x == "1") return "Open";
         return "Unknown";
     }],
     ["RL_Window_State", "rlws", "Read Left Window State", function(x)
     {
-        if(x == "0") return "Closed";
-        if(x == "1") return "Open";
+        if (x == "0") return "Closed";
+        if (x == "1") return "Open";
         return "Unknown";
     }],
-    ["AccelFB", "afb", "AccelFB"],
-    ["Inlet_Switch_Indicator", "isi", "Inlet Switch Indicator"],
-    ["AC_Blower_Level", "abl", "AC Blower Strength"],
-    ["WhilteLine_Left", "wl", "Whiteline Left Support"],
-    ["LKA_Steering_Support", "lss", "LKA Steering Support"],
-    ["WhilteLine_Right", "wr", "Whiteline Right Support"],
-    ["Latitude", "lat", "Latitude"],
-    ["Longitude", "lon", "Longitude"],
-    ["Power_Mode", "pm", "Power Mode"],
-    ["Vehicle_Speed", "vs", "Speed"],
-    ["Streering_Angle_Degree", "sad", "Steering Wheel Angle"],
-    ["Radar_Cruise_State", "ras", "Radar Cruise State"],
-    ["Odometer_Reading", "or", "Odometer"],
-    ["Engine_Speed", "es", "Engine Speed"],
-    ["Transmission_Type", "tt", "Transmission Type"],
-    ['Brake_Control_Volume', "bcv", "Brake Control Volume"],
-    ["AccelLR", "alr", "AccelLR"]
+    ["AccelFB", "afb", "AccelFB", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Inlet_Switch_Indicator", "isi", "Inlet Switch Indicator", function(x)
+    {
+        if (x == "0") return "Off";
+        return "On";
+    }],
+    ["AC_Blower_Level", "abl", "AC Blower Strength", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["WhilteLine_Left", "wl", "Whiteline Left Support", function(x)
+    {
+        if (x == "0") return "No Lane / Road Edge";
+        if (x == "1") return "White Line / Edge Seen";
+        return "Unknown";
+    }],
+    ["LKA_Steering_Support", "lss", "LKA Steering Support", function(x)
+    {
+        if (x == "0") return "Except During Support";
+        return "During Support";
+    }],
+    ["WhilteLine_Right", "wr", "Whiteline Right Support", function(x)
+    {
+        if (x == "0") return "No Lane / Road Edge";
+        if (x == "1") return "White Line / Edge Seen";
+        return "Unknown";
+    }],
+    ["Latitude", "lat", "Latitude", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Longitude", "lon", "Longitude", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Power_Mode", "pm", "Power Mode", function(x)
+    {
+        if (x == "0") return "Off";
+        return "On";
+    }],
+    ["Vehicle_Speed", "vs", "Speed", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Streering_Angle_Degree", "sad", "Steering Wheel Angle", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Radar_Cruise_State", "ras", "Radar Cruise State", function(x)
+    {
+        if (x == "0") return "Absence of Equipment";
+        return "Presence of Equipment";
+    }],
+    ["Odometer_Reading", "or", "Odometer", function(x)
+    {
+        return parseInt(x);
+    }],
+    ["Engine_Speed", "es", "Engine Speed", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Transmission_Type", "tt", "Transmission Type", function(x)
+    {
+        if (x == "0") return "Automatic";
+
+        if (x == "1") return "Manual";
+
+        if (x == "2") return "Continuously Variable";
+
+        return "Automatic";
+    }],
+    ['Brake_Control_Volume', "bcv", "Brake Control Volume", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["AccelLR", "alr", "AccelLR", function(x)
+    {
+        return parseFloat(x);
+    }]
 ];
 
-
-
+function nullFixer(x, a)
+{
+    var x = x || "";
+    return a(x);
+}
 
 function init()
 {
