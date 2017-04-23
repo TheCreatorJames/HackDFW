@@ -1,21 +1,6 @@
 * h1, h2, h3, h4, h5, p{
   font-weight:300;
-  letter-spacing: .15em;
 }
-
-.inactive{
-  border-left:none;
-}
-.active{
-  border-left: 3px solid #c00000;
-}
-@media(max-width: 767px){
-  .active{
-    border-left: none;
-  }
-}
-
-
 /*top nav*/
 .navbar-inverse{
   font-family:"HelveticaNeue Extended", Helvetica;
@@ -76,8 +61,7 @@
   margin-top:50px;
 }
 #car img{
-  /*width: 60px;*/
-  height: 30px;
+  width: 60px;
 }
 #gears img{
   width:43px;
@@ -198,12 +182,14 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 
 /*Start of Tables*/
 .scrolling-things{
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display:inline-flex;
   padding-bottom: 10px;
 }
 .mobile-scrolling-things{
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   width:80%;
   display:inline-flex;
 }
@@ -221,12 +207,6 @@ p.table-data{
 text-align: center;
 }
 
-.data-col.data-things, h3.table-data{
-  font-weight: 600;
-}
-.data-col.data-things, h4.table-data{
-  font-weight: 400;
-}
 /*End Table Things*/
 
 .light-button{
@@ -244,7 +224,6 @@ text-align: center;
   background: #252525;
   border: 1px solid #252525;
   color: #fff;
-  box-shadow: 0 0 10px rgba(37,37,37,0.3);
 }
 
 @media(max-width:767px){

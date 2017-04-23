@@ -1,0 +1,22 @@
+/*icon sizing*/
+
+#miles{
+  width:45px;
+}
+#gas{
+  width:45px;
+}
+#engine{
+  width:45px;
+}
+#tires{
+  width:45px;
+}
+
+.maintenance{
+  line-height: .5em;
+  margin-top: 30px;
+}
+.maintenance p{
+  font-weight:400;
+}
