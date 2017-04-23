@@ -369,5 +369,8 @@ function simulate(q)
  * Chris's Tone Generation Stuff
  */
  // setInterval(console.log(getSimulationSecond()),1000)
-setInterval(function (){speedFunc(getSpeed(getSimulationSecond()))},1000);
+setInterval(function (){
+  speedFunc(getSpeed(getSimulationSecond()))
+  
+},1000);
 /*END TONE GENERATION BUH BYE*/
