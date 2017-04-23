@@ -293,6 +293,11 @@ function simulate(q)
     var q = q || null;
 
     if (q > 1) return;
+    if (q < 0)
+    {
+        mut++;
+        return; 
+    }
 
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
@@ -321,6 +326,10 @@ function simulate(q)
     simulationSecondIndex++;
     unload();
 
+    if(typeof speed === "undefined")
+    {
+        asyncRead();
+    }
 
     var qr = 0;
     if (q != 1)
@@ -329,11 +338,6 @@ function simulate(q)
         qr = mut;
     }
 
-
-    if(typeof speed === "undefined")
-    {
-        asyncRead();
-    }
 
 
     if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
