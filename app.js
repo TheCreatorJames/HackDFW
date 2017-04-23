@@ -51,7 +51,7 @@ function initSession(req)
     }
     else
     {
-        req.session.logged = false;
+        req.session.logged = true;
         req.session.username = "";
     }
     return req.session;
