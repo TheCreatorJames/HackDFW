@@ -70,12 +70,12 @@ app.get("/", function(req, res)
     if(sess.logged)
     {
         
-        res.send("travelData.html");    
+        res.sendfile("travelData.html");    
     }
     else
     // Otherwise, Display the Home Screen
     {
-        res.send("login.html");
+        res.sendfile("login.html");
     }
 });
 
