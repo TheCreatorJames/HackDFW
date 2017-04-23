@@ -20,3 +20,24 @@
 .maintenance p{
   font-weight:400;
 }
+.left{
+  height: 100%;
+}
+@media(max-width: 767px){
+  .left{
+    box-shadow: none;
+  }
+}
+.car-container{
+  margin-top: 50px;
+  display: table;
+  width: 100%;
+}
+
+.car-container img{
+  width: 100%;
+  padding-top: 20%;
+  vertical-align: middle;
+  display: table-cell;
+  text-align: center;
+}
