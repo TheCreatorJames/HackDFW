@@ -18,3 +18,18 @@ app.use(express.static(__dirname + "/html"));
 app.use(express.static(__dirname + "/js"));
 app.use(express.static(__dirname + "/css"));
 
+
+
+// Tell the Engine to use Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(session({
+    secret: 'secretHackDFW',
+    saveUninitialized: true,
+    resave: true
+}));
+
+
+
+
