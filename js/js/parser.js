@@ -11,6 +11,7 @@ var everything = [];
 var arrayOffsets = {};
 var lastSpeed = 0;
 var lastAccel = 0;
+var lastAnything = {};
 
 var simulationSpeed = 10;
 var simSpeedSkips = 1;
@@ -64,7 +65,7 @@ var shortener = [
         if (x == "1") return "Open";
         return "Closed";
     }],
-    ["Fuel_Guage", "fg", "Fuel Gauge", function(x)
+    ["Fuel_Gauge", "fg", "Fuel Gauge", function(x)
     {
         return parseInt(x);
     }],
@@ -142,11 +143,11 @@ var shortener = [
         if (x == "1") return "White Line / Edge Seen";
         return "Unknown";
     }],
-    ["Latitude", "lat", "Latitude", function(x)
+    ["Latitude", "latitude", "Latitude", function(x)
     {
         return parseFloat(x);
     }],
-    ["Longitude", "lon", "Longitude", function(x)
+    ["Longitude", "longitude", "Longitude", function(x)
     {
         return parseFloat(x);
     }],
@@ -392,6 +393,11 @@ function getSimulationSecond()
     return simulationSecondIndex;
 }
 
+function getEverything(second)
+{
+    return everything[getPosition(second)];
+}
+
 function getSteeringWheelAngle(second)
 {
     return steeringWheel[getPosition(second)];
@@ -466,16 +472,16 @@ function parseLine(data)
     var ev = [];
     shortener.forEach(function(x)
     {
-        ev.push(tokens[arrayOffsets[x[1]]]);
-
-
-        if (typeof tokens[arrayOffsets[x[1]]] == "undefined")
+        if(typeof arrayOffsets[x[1]] == "undefined")
         {
-            ev.pop();
-            var z = ev.length;
-            if (everything.length > 1)
-                ev.push(everything[everything.length - 1][z - 1]);
-            else ev.push(undefined);
+            ev.push(0);
+        }
+        else
+        {
+            if(tokens[arrayOffsets[x[1]]].length != 0)
+                lastAnything[x[1]] = tokens[arrayOffsets[x[1]]];
+
+            ev.push(lastAnything[x[1]]);
         }
     });
     everything.push(ev);

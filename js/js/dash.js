@@ -17,7 +17,7 @@ function replaceDash2(offset)
             $(arr2[i]).show();
             $(arr3[i]).show();
 
-            arr[i].innerHTML = shortener[offset+i][2];
+            $(arr[i]).text(shortener[offset+i][2]);
         }
         else
         {
@@ -62,7 +62,7 @@ function replaceDash(offset)
             $(arr2[i]).show();
             $(arr3[i]).show();
 
-            arr[i].innerHTML = shortener[offset+i][2];
+            $(arr[i]).text(shortener[offset+i][2]);
         }
         else
         {
@@ -72,3 +72,28 @@ function replaceDash(offset)
         }
     }
 }
+
+addCallback(function()
+{
+    var s= getSimulationSecond();
+    var e = getEverything(s);
+    offset = rot * 6;
+    var arr3 = $(".scrolling-things div tbody tr td p");
+
+    for(var i = 0; i < 6; i++)
+    {
+        if(i + offset < shortener.length)
+        {
+            var res = nullFixer(e[offset+i], shortener[offset+i][3]);
+            $(arr3[i]).text(res);
+        }
+        else
+        {
+
+        }
+    }
+
+
+
+
+});

@@ -4,8 +4,6 @@ var cPenta = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]
 var abcCPenta = ['C,', 'D', 'E', 'G', 'A', 'C\'']
 
 
-
-
 var shimmer = new Instrument({wave: 'sawtooth', cutoff: 1000, release: 4, detune: 0})
 var chords = new Instrument({wave: 'piano', release: 2, cutoff:1000, detune: 0})
 var chordNotes = ['[C,E]', '[C,E]', '[D,F]']
@@ -41,3 +39,15 @@ function chordstabs(currentSpeed){
   chords.play(chordNotes[Math.floor((Math.random() * 3))])}
 }
 }
+
+/*
+ * Chris's Tone Generation Stuff
+ */
+// setInterval(console.log(getSimulationSecond()),1000)
+setInterval(function()
+{
+    speedFunc(getSpeed(getSimulationSecond()))
+    bassFunc(getSpeed(getSimulationSecond()))
+    chordstabs(getSpeed(getSimulationSecond()))
+}, 1000);
+/*END TONE GENERATION BUH BYE*/
