@@ -182,12 +182,14 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 
 /*Start of Tables*/
 .scrolling-things{
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display:inline-flex;
   padding-bottom: 10px;
 }
 .mobile-scrolling-things{
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   width:80%;
   display:inline-flex;
 }

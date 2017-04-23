@@ -11,7 +11,7 @@ var users = new DataStore({ filename: "data/users.db", autoload: true });
 
 require("./app_user_methods.js")(users, bcrypt);
 
-GetOrAddUser("Jesse", "Jesse", "jesse", "password", null);
+GetOrAddUser("Jesse", "Jesse", "jesse", "password", function() {});
 
 // Init App
 var app = express();
