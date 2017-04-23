@@ -32,4 +32,58 @@ app.use(session({
 
 
 
+// Tell the Engine to use Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+
+// Initialize The Session
+function initSession(req)
+{
+    if(req.session.logged)
+    {
+    }
+    else
+    {
+        req.session.logged = false;
+        req.session.username = "";
+    }
+    return req.session;
+}
+
+
+
+
+
+// Main Page
+app.get("/", function(req, res)
+{
+    var sess = initSession(req);
+
+    // If Logged in, Display the Dashboard
+    if(sess.logged)
+    {
+        
+        res.send("travelData.html");    
+    }
+    else
+    // Otherwise, Display the Home Screen
+    {
+        res.send("login.html");
+    }
+});
+
+
+
+
+// Listen
+app.listen(30001, function()
+{
+    console.log("We are listening on port 30001.");
+});
