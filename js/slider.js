@@ -14,5 +14,4 @@ function RGB()
 
 }
 
-var r = $("#lol").slider(
-{}).on('slide', RGB).data('slider');
+var r = $("#lol").slider({}).on('slide', RGB).data('slider');

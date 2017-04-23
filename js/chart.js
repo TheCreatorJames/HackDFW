@@ -18,7 +18,15 @@ var accelerationData = {
     datasets: [
     {
         label: 'Acceleration',
-        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+
+
+
+
+
+
+
+
         backgroundColor: "rgba(255,0,0,0.4)"
     }]
 }
