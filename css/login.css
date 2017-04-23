@@ -32,6 +32,7 @@ body{
   background-color: #fff;
   color: #c00000;
   font-family: "HelveticaNeue Extended", Helvetica;
+  margin: 15px;
 }
 .submit:hover{
   border: none;
