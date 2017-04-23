@@ -138,7 +138,7 @@ app.get("/register", function(req,res)
     if(sess.logged)
     {
         
-     res.redirect("/");    
+        res.redirect("/");    
     }
     else
     // Otherwise, Display the Home Screen
@@ -160,9 +160,8 @@ app.get("/", function(req, res)
         res.sendfile("html/dash.html");    
     }
     else
-    // Otherwise, Display the Home Screen
     {
-        res.sendfile("html/2index.html");
+        res.redirect("/register");
     }
 });
 

@@ -17,7 +17,7 @@ function speedFunc (currentSpeed) {
   }else{
     console.log(currentSpeed)
     var instrument = new Instrument({wave: 'square', decay: 0.3, cutoff:700, detune: 0})
-    instrument.play({tempo:Math.floor(100*Math.pow(currentSpeed,1/2))},'')
+    instrument.play({tempo:Math.floor(100*Math.pow(currentSpeed,1/2))}, 'fga')
   }
 }
 function bassFunc(currentSpeed){
