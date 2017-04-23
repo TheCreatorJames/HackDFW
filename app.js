@@ -114,8 +114,7 @@ app.get("/", function(req, res)
     // If Logged in, Display the Dashboard
     if(sess.logged)
     {
-        
-        res.sendfile("html/travelData.html");    
+        res.sendfile("html/dash.html");    
     }
     else
     // Otherwise, Display the Home Screen
