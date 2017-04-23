@@ -149,15 +149,29 @@ app.get("/register", function(req,res)
 
 
 
-// Main Page
-app.get("/", function(req, res)
+app.get("/dash", function(req,res)
 {
-    var sess = initSession(req);
+ var sess = initSession(req);
 
     // If Logged in, Display the Dashboard
     if(sess.logged)
     {
         res.sendfile("html/dash.html");    
+    }
+    else
+    {
+        res.redirect("/");
+    }
+});
+
+// Main Page
+app.get("/", function(req, res)
+{
+    var sess = initSession(req);
+
+    if(sess.logged)
+    {
+        res.sendfile("html/landing.html");    
     }
     else
     {
