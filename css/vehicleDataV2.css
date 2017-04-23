@@ -58,7 +58,13 @@
 .main-container{
   margin-top: 50px;
 }
+.maintenance{
+  margin-bottom: 30px;
+}
 .button-wrapper a{
   margin: 0 auto;
   padding-top: 30px;
+}
+.button-wrapper{
+  padding-bottom: 30px;
 }
