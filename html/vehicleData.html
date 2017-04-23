@@ -42,7 +42,7 @@
     <div class="container-fluid">
 
       <div class="col-xs-12 col-sm-2 col-md-2  sidebar">
-        <a  href="/"><div id="logo"><img src="images/logo.svg"></div> href="/"
+        <a  href="/"><div id="logo"><img src="images/logo.svg"></div>
         <ul class="nav nav-sidebar"></a>
           <a  href="/dash">
             <li class="icon" id="car"><img src="images/car.svg"></li>
@@ -70,8 +70,37 @@
   </div>
 -->
 
+<script>
+//add border left on hover for deskotp
+  $(".icon").mouseenter(
+    function(){
+      $(this).removeClass("inactive")
+      .toggleClass("active")
+      }
+  )
+  $(".icon").mouseleave(
+    function(){
+      $(this).removeClass("active")
+      .toggleClass("inactive")
+  })
 
 
+//change icon color for mobile
+  var windowSize = $(window).width();
+  if(windowSize < 767){
+    $(".icon-img").mouseenter(
+      function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src.replace(".svg", "-red.svg"));
+    });
+      $(".icon-img").mouseleave(
+        function(){
+          var src = $(this).attr('src');
+          $(this).attr('src', src.replace("-red.svg", ".svg" ));
+      });
+  }
+  else{}
+</script>
 
 
 <!--Start Desktop Main Content -->
@@ -127,7 +156,7 @@
 
 
                 </div>
-                <button type="button" class="light-button">Travel Data</button>
+                <button type="button" class="light-button" href="/dash">Travel Data</button>
               </div>
 
               <div class="col-sm-6 col-md-7 col-xs-12 right">
@@ -193,7 +222,7 @@
 
 
         </div>
-        <button type="button" class="light-button">Travel Data</button>
+        <button type="button" class="light-button" href"/dash">Travel Data</button>
       </div>
 </div>
 <!--End responsive main content -->
