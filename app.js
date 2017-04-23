@@ -155,7 +155,7 @@ app.get("/health", function(req,res)
     // If Logged in, Display the Dashboard
     if(sess.logged)
     {
-        res.sendFile("html/vehicleData.html");    
+        res.sendfile("html/vehicleData.html");    
     }
     else
     // Otherwise, Display the Home Screen
