@@ -352,7 +352,7 @@ function simulate(q)
         if(qr == 1)
         setTimeout(function()
         {
-            for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
+            for (var m = 0; m < simSpeedSkips; m++) simulate(0);
 
             /*
             setTimeout(function()
@@ -368,7 +368,7 @@ function simulate(q)
             if(qr == 1) {
             mut = 0;
             simulate(0); }
-        }, Math.max(1000 / simulationSpeed, 1));
+        }, Math.max(1000 / simulationSpeed, 8));
 
         executeCallbacks();
     }
