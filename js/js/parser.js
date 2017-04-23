@@ -30,7 +30,104 @@ var accelerationSum = 0;
 var minAcceleration = 0;
 var maxAcceleration = 0;
 
-
+var shortener = [
+    ["Fuel_Consum", "fcon", "Fuel Consumption", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["GD_Engine_Temp", "gdt", "Engine Temperature", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Steering_Angle_Speed", "sat", "Steering Angle Speed", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Hood_Courtesy", "hc", "Hood Courtesy", function(x)
+    {
+        if (x == "0") return "Closed";
+        return "Open";
+    }],
+    ["Passenger_AC_Value", "pav", "Passenger AC Temperature", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Driver_AC_Value", "dav", "Driver AC Temperature", function(x)
+    {
+        return parseFloat(x);
+    }],
+    ["Driver_Window_State", "dws", "Driver Window State", function(x)
+    {
+        if(x == "0") return "Unknown";
+        if(x == "1") return "Open";
+        return "Closed";
+    }],
+    ["Fuel_Guage", "fg", "Fuel Gauge", function(x)
+    {
+        return parseInt(x);
+    }],
+    ["Rear_Fog_Light", "rfl", "Rear Fog Light", function(x)
+    {
+        if(x == "0") return "Off";
+        return "On";
+    }],
+    ["Lounge_Illum_Light", "lil", "Lounge Illumination Light", function(x)
+    {
+        if(x == "0") return "Off";
+        return "On";
+    }],
+    ["Front_Fog_Light", "ffl", "Front Fog Light", function(x)
+    {
+        if(x == "0") return "Off";
+        return "On";
+    }],
+    ["Front_Dome_Light", "fdl", "Front Dome Light", function(x)
+    {
+        if(x == "0") return "Off";
+        return "On";
+    }],
+    ["Slide_Roof", "sr", "Slide Roof", function(x)
+    {
+        if(x == "2") return "Closed";
+        if(x == "1") return "Open";
+        return "Unknown";
+    }],
+    ["Passenger_Window_State", "pws", "Passenger Window State", function(x)
+    {
+        if(x == "0") return "Closed";
+        if(x == "1") return "Open";
+        return "Unknown";
+    }],
+    ["RR_Window_State", "rrws", "Rear Right Window State", function(x)
+    {
+        if(x == "0") return "Closed";
+        if(x == "1") return "Open";
+        return "Unknown";
+    }],
+    ["RL_Window_State", "rlws", "Read Left Window State", function(x)
+    {
+        if(x == "0") return "Closed";
+        if(x == "1") return "Open";
+        return "Unknown";
+    }],
+    ["AccelFB", "afb", "AccelFB"],
+    ["Inlet_Switch_Indicator", "isi", "Inlet Switch Indicator"],
+    ["AC_Blower_Level", "abl", "AC Blower Strength"],
+    ["WhilteLine_Left", "wl", "Whiteline Left Support"],
+    ["LKA_Steering_Support", "lss", "LKA Steering Support"],
+    ["WhilteLine_Right", "wr", "Whiteline Right Support"],
+    ["Latitude", "lat", "Latitude"],
+    ["Longitude", "lon", "Longitude"],
+    ["Power_Mode", "pm", "Power Mode"],
+    ["Vehicle_Speed", "vs", "Speed"],
+    ["Streering_Angle_Degree", "sad", "Steering Wheel Angle"],
+    ["Radar_Cruise_State", "ras", "Radar Cruise State"],
+    ["Odometer_Reading", "or", "Odometer"],
+    ["Engine_Speed", "es", "Engine Speed"],
+    ["Transmission_Type", "tt", "Transmission Type"],
+    ['Brake_Control_Volume', "bcv", "Brake Control Volume"],
+    ["AccelLR", "alr", "AccelLR"]
+];
 
 
 
@@ -41,7 +138,7 @@ function init()
 
     fileInput.addEventListener('change', function(e)
     {
-
+        delete everything;
         delete speed;
         delete acceleration;
         delete steeringWheel;
@@ -49,6 +146,7 @@ function init()
         delete lon;
         delete brakes;
 
+        everything = [];
         speed = [];
         acceleration = [];
         steeringWheel = [];
@@ -116,15 +214,15 @@ function init()
                     {
                         arrayOffsets['latitude'] = k;
                     }
-                    
+
                     if (lineVals[k] == 'longitude')
                     {
                         arrayOffsets['longitude'] = k;
                     }
 
-                    [["Fuel_Consum", "fcon"], ["GD_Engine_Temp", "gdt"], ["Steering_Angle_Speed","sat"], ["Hood_Courtesy", "hc"], ["Passenger_AC_Value", "pav"], ["Driver_AC_Value", "dav"], ["Fuel_Guage", "fg"], ["Rear_Fog_Light", "rfl"], ["Lounge_Illum_Light", "lil"], ["Slide_Roof", "sr"], ["Passenger_Window_State", "pws"], ["RR_Window_State", "rrws"], ["RL_Window_State", "rlws"], ["AccelFB", "afb"], ["Inlet_Switch_Indicator", "isi"], ["AC_Blower_Level", "abl"], ["WhilteLine_Left", "wl"], ["LKA_Steering_Support", "lss"], ["WhilteLine_Right", "wr"]].forEach(function(x)
+                    shortener.forEach(function(x)
                     {
-                        if(lineVals[k] == x[0])
+                        if (lineVals[k] == x[0])
                         {
                             arrayOffsets[x[1]] = k;
                         }
@@ -207,6 +305,7 @@ function unload()
     {
         speed.splice(0, 5490);
         brakes.splice(0, 5490);
+        everything.splice(0, 5490);
         acceleration.splice(0, 5490);
         steeringWheel.splice(0, 5490);
         lat.splice(0, 5490);
@@ -284,11 +383,29 @@ function parseLine(data)
 {
     var tokens = data.split(',');
 
-    if(tokens.length == 1)
+    if (tokens.length == 1)
     {
         speed.push(lastSpeed);
         accel.push(lastAccel);
     }
+
+
+    var ev = [];
+    shortener.forEach(function(x)
+    {
+        ev.push(tokens[arrayOffsets[x[1]]]);
+
+
+        if (typeof tokens[arrayOffsets[x[1]]] == "undefined")
+        {
+            ev.pop();
+            var z = ev.length;
+            if (everything.length > 1)
+                ev.push(everything[everything.length - 1][z - 1]);
+            else ev.push(undefined);
+        }
+    });
+    everything.push(ev);
 
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
