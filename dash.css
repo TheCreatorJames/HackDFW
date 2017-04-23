@@ -1,0 +1,284 @@
+* h1, h2, h3, h4, h5, p{
+  font-weight:300;
+}
+/*top nav*/
+.navbar-inverse{
+  font-family:"HelveticaNeue Extended", Helvetica;
+  font-weight:100;
+  font-size:21px;
+  text-align: center;
+  letter-spacing:5px;
+  background-color: #c00000;
+  color: #fff;
+  margin:0;
+  z-index: 999;
+  position: fixed;
+  top:0;
+  left:0;
+  border:none;
+  min-height:100px;
+}
+.car-model{
+  font-size:21px;
+  font-weight:100;
+  padding-top: 20px;
+
+}
+
+/*Sidebar Nav*/
+.sidebar{
+  position: fixed;
+  z-index: 1001;
+  display:block;
+  background-color: #252525;
+  margin: 0px;
+  height:100%;
+  left:0;
+  padding-left:0;
+  padding-right:0;
+  box-shadow:5px 5px 14px  rgba(0,0,0,0.1);
+}
+#logo{
+  background-color: #c00000;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  vertical-align: middle;
+  text-align:center;
+  height:100px;
+}
+#logo img{
+  height:41px;
+}
+.nav-sidebar{
+  list-style: none;
+  text-align:center;
+  vertical-align: middle;
+  padding-top: 30px;
+  padding-bottom:15px;
+  padding-left: 0px;
+}
+.nav-sidebar li{
+  margin-top:50px;
+}
+#car img{
+  width: 60px;
+}
+#gears img{
+  width:43px;
+}
+#headphones img{
+  width: 37px;
+}
+#user img{
+  width: 45px;
+}
+@media(max-width:767px){
+  .sidebar{
+    display:inline-block;
+    height: auto;
+  }
+  #logo{
+    height:60px;
+    padding: 0px;
+    padding-top:10px;
+  }
+  .nav-sidebar{
+    padding: 0px;
+  }
+  .nav-sidebar li{
+    display:inline-block;
+    margin: 20px;
+  }
+}
+
+/*Main Content Wrapper*/
+.main{
+  text-align: center;
+  margin-top:100px;
+  position: fixed;
+  height: 100%;
+}
+@media(max-width:767px){
+  .main{
+    height: inherit;
+    margin-top:145px;
+    width:100%;
+  }
+}
+
+/*Main Content*/
+.main-content{
+  height:100%;
+}
+@media(max-width:767px){
+  #hide-mobile-1{
+    display:none;
+  }
+  #hide-mobile-2{
+    display:none;
+  }
+  .main{
+    margin-top:30px;
+  }
+  .left{
+  margin-top:30px;
+  }
+  #speaker{
+    margin-top:0;
+  }
+}
+@media(min-width:767px){
+  #hide-desktop-1{
+    display:none;
+  }
+  #hide-desktop-2{
+    display:none;
+  }
+}
+
+
+/*Left Side*/
+.left{
+  height:100%;
+  box-shadow:5px 5px 14px  rgba(0,0,0,0.1);
+}
+.left-headline{
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #c00000;
+  margin-top: 80px;
+}
+.travel-date{
+  vertical-align: middle;
+  margin-top: 30px;
+}
+
+#calendar{
+  height: 35px;
+  margin-right:15px;
+  vertical-align: middle;
+
+}
+#calendar-input{
+  border: 1px solid #252525;
+  padding: 10px;
+  text-align: center;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator{
+    opacity:1;
+}
+#calendar-input:focus {
+    outline: none !important;
+    border:1px solid #252525  ;
+    box-shadow: 0 0 10px rgba(37,37,37,0.3);
+}
+
+/*Start of Tables*/
+.scrolling-things{
+  overflow: scroll;
+  width:340px;
+  display:inline-flex;
+  border-bottom: 1px solid #252525;
+  padding-bottom: 10px;
+}
+.mobile-scrolling-things{
+  overflow: scroll;
+  width:340px;
+  display:inline-flex;
+  border-bottom: 1px solid #252525;
+  padding-bottom: 10px;
+}
+.travel-data-table{
+  width:100%;
+  margin:20px 0;
+}
+h3.table-data{
+  margin-top: 10px;
+}
+p.table-data{
+  margin-bottom:10px;
+}
+.data-col.data-things, h3.table-data, h4.table-data, p.table-data{
+text-align: center;
+}
+
+/*End Table Things*/
+
+.light-button{
+  background: #fff;
+  border: 1px solid #252525;
+  color: #252525;
+  padding: 15px;
+  text-transform: uppercase;
+  font-family:"HelveticaNeue Extended", Helvetica;
+  font-weight:200;
+  font-size: 14px;
+  margin-top:30px;
+}
+.light-button:hover{
+  background: #252525;
+  border: 1px solid #252525;
+  color: #fff;
+}
+
+@media(max-width:767px){
+  .left{
+    height: inherit;
+    width:100%;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .data-col.data-things{
+      padding:0;
+      margin: 0;
+      font-size:11px;
+      width:100%;
+      padding-left:10px;
+  }
+  .travel-data-table{
+    display: inline;
+    padding:0;
+    margin-right:10px;
+  }
+  .light-button{
+    margin:10px 0;
+  }
+}
+
+
+/*Right Side*/
+.right{
+  height:100%;
+  padding-left:0;
+  padding-right:0;
+}
+#speaker{
+  float: left;
+  margin: 30px;
+  margin-top: 80px;
+  z-index: 100;
+}
+#speaker img{
+  width:35px;
+}
+#charts-go-here{
+  width:100%;
+  height:100%;
+  background-color: #bec0c4;
+  opacity: .2;
+  z-index: -5;
+}
+@media(max-width:767px){
+  .right{
+    height: inherit;
+    width:100%;
+    }
+  }
+}
