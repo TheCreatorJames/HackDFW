@@ -23,6 +23,6 @@
     "express": "*",
     "bcrypt": "*",
     "passport": "*",
-    "session": "*"
+    "express-session": "*"
   }
 }
