@@ -41,14 +41,19 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-12 col-sm-2 col-md-2  sidebar">
-          <div id="logo" href="/"><img src="images/logo.svg"></div>
-          <ul class="nav nav-sidebar">
-            <li class="icon" id="car" href="/dash"><img src="images/car.svg"></li>
-            <li class="icon" id="gears" href="/health"><img src="images/gears.svg"></li>
-              <li class="icon" id="headphones"><img src="images/headphones.svg"></li>
-              <li class="icon" id="user"><img src="images/user.svg"></li>
-          </ul>
-        </div>
+          <div class="col-xs-12 col-sm-2 col-md-2  sidebar">
+            <a  href="/"><div id="logo"><img src="images/logo.svg"></div> href="/"
+            <ul class="nav nav-sidebar"></a>
+              <a  href="/dash">
+                <li class="icon" id="car"><img src="images/car.svg"></li>
+              </a>
+              <a  href="/health">
+                <li class="icon" id="gears"><img src="images/gears.svg"></li>
+              </a>
+                <li class="icon" id="headphones"><img src="images/headphones.svg"></li>
+                <li class="icon" id="user"><img src="images/user.svg"></li>
+            </ul>
+          </div>
 
 
 <!--Start Desktop Main Content -->
@@ -59,9 +64,9 @@
                 <img src="images/prius.png">
               </div>
               <div class="button-wrapper">
-                <a href="/dash"><button class="light-button">Travel Data</button></a>
-                <a href="/health"><button class="light-button">Vehicle Health</button></a>
-                <button class="light-button">Dealership</button>
+                <a href="/dash"><button type="button" class="light-button">Travel Data</button></a>
+                <a href="/health"><button type="button" class="light-button">Vehicle Health</button></a>
+                <button  type="button" class="light-button">Dealership</button>
               </div>
             </div>
       </div>
