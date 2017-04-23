@@ -1,9 +1,6 @@
 var velocityCtx = document.getElementById("velocityDisplay");
 var accelerationCtx = document.getElementById("accelerationDisplay");
 
-Chart.defaults.global.tooltips.enabled = false;
-
-
 var velocityData = {
     labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     datasets: [
@@ -18,15 +15,7 @@ var accelerationData = {
     datasets: [
     {
         label: 'Acceleration',
-
-
-
-
-
-
-
-
-
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         backgroundColor: "rgba(255,0,0,0.4)"
     }]
 }
