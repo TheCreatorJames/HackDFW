@@ -93,9 +93,9 @@ app.get("/auth/local/register", function(req, res)
     var name = req.param('username');
     var pass = req.param('password');
 
-    AddUser(name, name, "", pass, function(err, doc)
+    AddUser(name, name, "", pass, function(succeeded, doc)
     {
-        if(!err)
+        if(succeeded)
         {
             sess.logged = true;
             sess.username = doc.username;
