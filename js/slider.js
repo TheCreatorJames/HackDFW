@@ -3,9 +3,9 @@ function RGB()
     $("#meh").text("" + r.getValue());
     simulationSpeed = r.getValue();
 
-    if (1000 / simulationSpeed < 5)
+    if (1000 / simulationSpeed < 1)
     {
-        simSpeedSkips = Math.floor(5 / (1000 / simulationSpeed));
+        simSpeedSkips = Math.floor(1 / (1000 / simulationSpeed));
     }
     else
     {

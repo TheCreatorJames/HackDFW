@@ -116,8 +116,9 @@ function init()
                     }
                 }
 
-                asyncRead = function()
+                asyncRead = function(f)
                 {
+                    var f = f || true;
                     var count = 0;
                     var j = i;
                     // discard first line of input
@@ -132,6 +133,7 @@ function init()
                         {}
                         if (count++ == MAX_COUNT)
                         {
+                            if(f)
                             setTimeout(asyncRead, 100);
                             break;
                         }
@@ -159,7 +161,7 @@ function init()
                     }
                 }
 
-                asyncRead();
+                asyncRead(true);
 
                 // after parsing data, start simulation
                 simulate();
@@ -278,6 +280,8 @@ function parseLine(data)
 
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
+    
+
 
     speed.push(lastSpeed);
     steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
@@ -293,10 +297,7 @@ function simulate(q)
     var q = q || null;
 
     if (q > 1) return;
-    if (mut < 0)
-    {
-        mut++;
-    }
+
 
     var speed = getSpeed(simulationSecondIndex);
     var acceleration = getAcceleration(simulationSecondIndex);
@@ -316,26 +317,30 @@ function simulate(q)
     /*
      * Chris's Tone Generation Stuff
      */
-     //currently working well for up to 136 multiplier
-     if(simulationSecondIndex%300===0){
-       instrument.play('CD')
-       shimmer.play('eg3|beg')
-     }
-     /*END TONE GENERATION BUH BYE*/
+    //currently working well for up to 136 multiplier
+    if (simulationSecondIndex % 300 === 0)
+    {
+        instrument.play('CD')
+        shimmer.play('eg3|beg')
+    }
+    /*END TONE GENERATION BUH BYE*/
     simulationSecondIndex++;
     unload();
 
-    if(typeof speed === "undefined")
+    if (typeof speed === "undefined")
     {
-        asyncRead();
+        speed = [];
+        asyncRead(false);
+        
     }
 
     var qr = 0;
-    if (q != 1)
-    {
-        mut++;
-        qr = mut;
-    }
+
+
+
+    mut++;
+    qr = mut;
+
 
 
 
@@ -343,11 +348,27 @@ function simulate(q)
     {}
     else
     {
+        
+        if(qr == 1)
         setTimeout(function()
         {
             for (var m = 0; m < simSpeedSkips; m++) simulate(qr);
-            mut--;
-        }, Math.max(1000 / simulationSpeed, 5));
+
+            /*
+            setTimeout(function()
+            {
+                if (qr == 1)
+                {
+                    mut = 0;
+                    simulate(0);
+                }
+            }, Math.max(1000 / simulationSpeed, 5));
+            */
+
+            if(qr == 1) {
+            mut = 0;
+            simulate(0); }
+        }, Math.max(1000 / simulationSpeed, 1));
 
         executeCallbacks();
     }
