@@ -372,5 +372,6 @@ function simulate(q)
 setInterval(function (){
   speedFunc(getSpeed(getSimulationSecond()))
   bassFunc(getSpeed(getSimulationSecond()))
+  chordstabs(getSpeed(getSimulationSecond()))
 },1000);
 /*END TONE GENERATION BUH BYE*/

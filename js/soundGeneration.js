@@ -11,7 +11,7 @@ var chords = new Instrument({wave: 'piano', release: 2, cutoff:1000, detune: 0})
 var chordNotes = ['[C,E]', '[C,E]', '[D,F]']
 window.addEventListener('keydown', function (e) {
   var char = abcCPenta[Math.floor((Math.random() * 6))]
-  chords.play(chordNotes[Math.floor((Math.random() * 3))])
+
 })
 function speedFunc (currentSpeed) {
   if(currentSpeed==null){
@@ -26,7 +26,7 @@ function bassFunc(currentSpeed){
   if(currentSpeed==null){
     return
   }else{
-  var bassNotes = ['C,', 'F,', 'G,']
+  var bassNotes = ['C,', 'D,', 'G,']
   var bass = new Instrument({wave: 'sine', release: 2, cutoff:1000, detune: 0})
   bass.play(bassNotes[Math.floor((Math.random() * 3))])
 }
@@ -36,8 +36,8 @@ function chordstabs(currentSpeed){
   if(currentSpeed==null){
     return
   }else{
-  var chordNotes = ['C,', 'D,', 'G,']
+  if(Math.random() < 0.5){var chordNotes = ['[C,E]', '[C,E]', '[D,F]']
   var chords = new Instrument({wave: 'piano', release: 2, cutoff:1000, detune: 0})
-  bass.play(bassNotes[Math.floor((Math.random() * 3))])
+  chords.play(chordNotes[Math.floor((Math.random() * 3))])}
 }
 }
