@@ -31,6 +31,7 @@
      }
      addCallback(function()
      {
+       
          if (!markerPlaced)
          {
              marker = new google.maps.Marker(
@@ -44,7 +45,7 @@
          var currentSecond = getSimulationSecond();
          uluru.lng = getLongitude(currentSecond);
          uluru.lat = getLatitude(currentSecond);
-
+        
          if (countMap++ % 120 == 0)
          {
              if (lastCoord != null)
@@ -74,8 +75,6 @@
          }
          try
          { 
-            
-
              marker.setPosition(uluru);
              map.setCenter(marker.getPosition());
           }

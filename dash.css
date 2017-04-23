@@ -96,11 +96,16 @@
   text-align: center;
   margin-top:100px;
   height: 100%;
+  position: absolute;
 }
 @media(max-width:767px){
   .main{
     height: inherit;
     width:100%;
+    margin-left: 0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
   }
 }
 
@@ -177,55 +182,15 @@ input[type="date"]::-webkit-calendar-picker-indicator{
 
 /*Start of Tables*/
 .scrolling-things{
-  overflow: hidden;
-  width:92%;
+  overflow: scroll;
   display:inline-flex;
-  border-bottom: 1px solid #252525;
   padding-bottom: 10px;
 }
-
 .mobile-scrolling-things{
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: scroll;
   width:80%;
-  height:170px;
   display:inline-flex;
-  border-bottom: 1px solid #252525;
-  padding-bottom: 10px;
 }
-
-
-
-@media(max-width:705px)
-{
-  .mobile-scrolling-things{
-    width: 457px;
-  }
-}
-
-@media(max-width:597px)
-{
-  .mobile-scrolling-things{
-    width: 355px;
-  }
-}
-
-@media(max-width:488px)
-{
-  .mobile-scrolling-things{
-    width: 280px;
-  }
-}
-
-
-@media(max-width:370px)
-{
-  .mobile-scrolling-things{
-    width: 185px;
-  }
-}
-
-
 .travel-data-table{
   width:100%;
   margin:20px 0;
@@ -251,7 +216,7 @@ text-align: center;
   font-family:"HelveticaNeue Extended", Helvetica;
   font-weight:200;
   font-size: 14px;
-  margin-top:30px;
+  margin:30px 30px 0px 30px;
 }
 .light-button:hover{
   background: #252525;
@@ -270,16 +235,17 @@ text-align: center;
     margin-bottom:-15px;
   }
   .data-col.data-things{
-      padding:0;
       width:100%;
       padding-left:10px;
-      display: inline-flex;
   }
   .travel-data-table{
     display: inline;
     padding:0;
     margin-right:10px;
     margin-left: 10px;
+  }
+  .button-wrapper{
+    display: flex;
   }
   .light-button{
     display:grid;
@@ -299,6 +265,7 @@ text-align: center;
   margin: 30px;
   margin-top: 80px;
   z-index: 100;
+  position: fixed;
 }
 #speaker img{
   width:35px;
@@ -309,11 +276,23 @@ text-align: center;
   background-color: #bec0c4;
   opacity: .2;
   z-index: -5;
+  position: fixed;
 }
 @media(max-width:767px){
   .right{
     height: inherit;
     width:100%;
     }
+    #speaker{
+      margin-top:30px;
+    }
+  }
+}
+@media(min-width:767px){
+  #speaker{
+    position: fixed;
+  }
+  #charts-go-here{
+    position:fixed;
   }
 }

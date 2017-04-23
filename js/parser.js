@@ -56,6 +56,7 @@ function init()
 
         arrayOffsets = {};
         lastSpeed = 0;
+        lastAccel = 0;
 
         mut = 0;
 
@@ -87,7 +88,7 @@ function init()
                 var fileText = reader.result;
                 var lines = fileText.split('\n');
 
-                var MAX_COUNT = 1530;
+                var MAX_COUNT = 2530;
 
                 DATA_COUNT = lines.length;
                 var i = 1;
@@ -96,6 +97,7 @@ function init()
 
                 for (var k = 0; k < lineVals.length; k++)
                 {
+                    lineVals[k] = lineVals[k].replace(/\n/g, "").replace(/\r/g, "");
                     if (lineVals[k] == "AccelLR")
                     {
                         arrayOffsets["accel"] = k;
@@ -140,8 +142,8 @@ function init()
                         {}
                         if (count++ == MAX_COUNT)
                         {
-                            if(f)
-                            setTimeout(asyncRead, 100);
+                            if (f)
+                                setTimeout(asyncRead, 100);
                             break;
                         }
                     }
@@ -198,7 +200,6 @@ function unload()
         steeringWheel.splice(0, 5490);
         lat.splice(0, 5490);
         lon.splice(0, 5490);
-
         unloaded += 5490;
     }
 }
@@ -272,19 +273,26 @@ function parseLine(data)
 {
     var tokens = data.split(',');
 
+    if(tokens.length == 1)
+    {
+        speed.push(lastSpeed);
+        accel.push(lastAccel);
+    }
+
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
 
- if (tokens[arrayOffsets["accel"]].length != 0)
+    if (tokens[arrayOffsets["accel"]].length != 0)
         lastAccel = parseFloat(tokens[arrayOffsets["accel"]]);
 
     acceleration.push(lastAccel);
-    
+
     speed.push(lastSpeed);
     steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
     lat.push(parseFloat(tokens[arrayOffsets['latitude']]));
     lon.push(parseFloat(tokens[arrayOffsets['longitude']]));
     brakes.push(parseFloat(tokens[arrayOffsets['brake']]));
+
 }
 
 var mut = 0;
@@ -296,67 +304,57 @@ function simulate(q)
     if (q > 1) return;
 
 
-    var speed = getSpeed(simulationSecondIndex);
-    var acceleration = getAcceleration(simulationSecondIndex);
+    var speedy = getSpeed(simulationSecondIndex);
+    var accelerationy = getAcceleration(simulationSecondIndex);
 
-    if (speed < minSpeed)
-        minSpeed = speed;
-    if (speed > maxSpeed)
-        maxSpeed = speed;
-    speedSum += speed;
+    if (speedy < minSpeed)
+        minSpeed = speedy;
+    if (speedy > maxSpeed)
+        maxSpeed = speedy;
+    speedSum += speedy;
 
-    if (acceleration < minAcceleration)
-        minAcceleration = acceleration;
-    if (acceleration > maxAcceleration)
-        maxAcceleration = acceleration;
-    accelerationSum += acceleration;
+    if (accelerationy < minAcceleration)
+        minAcceleration = accelerationy;
+    if (accelerationy > maxAcceleration)
+        maxAcceleration = accelerationy;
+    accelerationSum += accelerationy;
 
 
     simulationSecondIndex++;
     unload();
 
-    if (typeof speed === "undefined")
-    {
-        speed = [];
-        asyncRead(false);
-
-    }
-
     var qr = 0;
-
-
-
     mut++;
     qr = mut;
+    if (simulationSecondIndex >= DATA_COUNT)
+    {
 
-
-
-
-    if (unloaded >= DATA_COUNT - speed.length && DATA_COUNT != 0)
-    {}
+    }
     else
     {
 
-        if(qr == 1)
-        setTimeout(function()
-        {
-            for (var m = 0; m < simSpeedSkips; m++) simulate(0);
-
-            /*
+        if (qr == 1)
             setTimeout(function()
             {
+                for (var m = 0; m < simSpeedSkips; m++) simulate(0);
+
+                /*
+                setTimeout(function()
+                {
+                    if (qr == 1)
+                    {
+                        mut = 0;
+                        simulate(0);
+                    }
+                }, Math.max(1000 / simulationSpeed, 5));
+                */
+
                 if (qr == 1)
                 {
                     mut = 0;
                     simulate(0);
                 }
-            }, Math.max(1000 / simulationSpeed, 5));
-            */
-
-            if(qr == 1) {
-            mut = 0;
-            simulate(0); }
-        }, Math.max(1000 / simulationSpeed, 8));
+            }, Math.max(1000 / simulationSpeed, 8));
 
         executeCallbacks();
     }
@@ -365,10 +363,11 @@ function simulate(q)
 /*
  * Chris's Tone Generation Stuff
  */
- // setInterval(console.log(getSimulationSecond()),1000)
-setInterval(function (){
-  speedFunc(getSpeed(getSimulationSecond()))
-  bassFunc(getSpeed(getSimulationSecond()))
-  chordstabs(getSpeed(getSimulationSecond()))
-},1000);
+// setInterval(console.log(getSimulationSecond()),1000)
+setInterval(function()
+{
+    speedFunc(getSpeed(getSimulationSecond()))
+    bassFunc(getSpeed(getSimulationSecond()))
+    chordstabs(getSpeed(getSimulationSecond()))
+}, 1000);
 /*END TONE GENERATION BUH BYE*/

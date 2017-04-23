@@ -64,21 +64,26 @@ var accelerationChart = Chart.Line(accelerationCtx,
 addCallback(function()
 {
     var currentSecond = getSimulationSecond();
-    var speed = getSpeed(currentSecond);
+    var speed2 = getSpeed(currentSecond);
     var acceleration = getAcceleration(currentSecond);
 
+
     //  console.log(speed);
+    if (!isNaN(speed2))
+    {
+        velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
+        velocityData.datasets[0].data.pop();
+        velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
+        velocityData.datasets[0].data.push(speed2);
+    }
 
-    velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
-    velocityData.datasets[0].data.pop();
-    velocityData.datasets[0].data = velocityData.datasets[0].data.reverse();
-    velocityData.datasets[0].data.push(speed);
-
-    accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
-    accelerationData.datasets[0].data.pop();
-    accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
-    accelerationData.datasets[0].data.push(acceleration);
-
+    if (!isNaN(acceleration))
+    {
+        accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
+        accelerationData.datasets[0].data.pop();
+        accelerationData.datasets[0].data = accelerationData.datasets[0].data.reverse();
+        accelerationData.datasets[0].data.push(acceleration);
+    }
     velocityChart.update();
     accelerationChart.update();
 });
