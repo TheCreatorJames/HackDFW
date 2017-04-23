@@ -1,0 +1,26 @@
+{
+  "name": "HackDFW",
+  "version": "1.0.0",
+  "description": "HackDFW project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheCreatorJames/HackDFW.git"
+  },
+  "author": "Team Awesomeness",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheCreatorJames/HackDFW/issues"
+  },
+  "homepage": "https://github.com/TheCreatorJames/HackDFW",
+  "dependencies": 
+  {
+    "compression" : "*",
+    "nedb": "*",
+    "express": "*",
+    "bcrypt": "*"
+  }
+}
