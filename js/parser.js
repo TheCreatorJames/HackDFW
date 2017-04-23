@@ -293,10 +293,9 @@ function simulate(q)
     var q = q || null;
 
     if (q > 1) return;
-    if (q < 0)
+    if (mut < 0)
     {
         mut++;
-        return; 
     }
 
     var speed = getSpeed(simulationSecondIndex);
