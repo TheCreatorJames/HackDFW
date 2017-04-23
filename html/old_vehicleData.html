@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/selectJS.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/dash.js"></script>
+<title>Toyota Telemetry Dashboard</title>
+<!-- bootstrap -->   <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/css/bootstrap-slider.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/bootstrap-slider.min.js"></script>
+
+
+<link rel="stylesheet" href="main.scss">
+<link rel="stylesheet" href="dash.css">
+<link rel="stylesheet" href="landing.css">
+<link rel="stylesheet" href="vehicleData.css">
+
+
+<script src="js/navbar.js"></script>
+
+</head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top ">
+      <div class="row">
+          <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+              <h3 class="car-model">2017 Toyota Prius Prime Advanced</h3>
+          </div>
+    </div>
+    </nav>
+
+    <div class="container-fluid">
+
+      <div class="col-xs-12 col-sm-2 col-md-2  sidebar">
+        <a  href="/"><div id="logo"><img src="images/logo.svg"></div>
+        <ul class="nav nav-sidebar"></a>
+          <a  href="/dash">
+            <li class="icon" id="car"><img src="images/car.svg"></li>
+          </a>
+          <a  href="/health">
+            <li class="icon" id="gears"><img src="images/gears.svg"></li>
+          </a>
+            <li class="icon" id="headphones"><img src="images/headphones.svg"></li>
+            <li class="icon" id="user"><img src="images/user.svg"></li>
+        </ul>
+      </div>
+
+<!--Slide Out Test for Dealership
+  <div class="row inactive" id="car-slide">
+    <div class="col-xs-12 col-sm-2 col-md-2  sidebar">
+      <div id="title">
+        <h4>Dealership</h4>
+      </div>
+      <ul class="nav nav-sidebar">
+        <li class="link"><p>Book Appointment</p></li>
+        <li class="link"><p>Maintenance Reminders</p></li>
+        <li class="link"><p>Alerts</p></li>
+      </ul>
+    </div>
+  </div>
+-->
+
+<script>
+//add border left on hover for deskotp
+  $(".icon").mouseenter(
+    function(){
+      $(this).removeClass("inactive")
+      .toggleClass("active")
+      }
+  )
+  $(".icon").mouseleave(
+    function(){
+      $(this).removeClass("active")
+      .toggleClass("inactive")
+  })
+
+
+//change icon color for mobile
+  var windowSize = $(window).width();
+  if(windowSize < 767){
+    $(".icon-img").mouseenter(
+      function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src.replace(".svg", "-red.svg"));
+    });
+      $(".icon-img").mouseleave(
+        function(){
+          var src = $(this).attr('src');
+          $(this).attr('src', src.replace("-red.svg", ".svg" ));
+      });
+  }
+  else{}
+</script>
+
+
+<!--Start Desktop Main Content -->
+        <div class="col-sm-10 col-sm-offset-2  col-md-10 col-md-offset-2 main" id="hide-mobile-1">
+            <div class="row main-content"id="hide-mobile-2">
+              <div class="col-sm-6 col-md-5 col-xs-12 left">
+                <h3 class="left-headline"> Vehicle Health</h3>
+                <div class="maintenance">
+                  <p>Next Checkup: 50,000 miles</p>
+                  <p>Next State Inspection: May 2017</p>
+                </div>
+
+  <!--Start of Data Tables -->
+                <div class="row scrolling-things">
+                  <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
+                    <table class="travel-data-table" id="measurement-1">
+                      <tr><td><img id="miles" src="images/miles.svg"></td></tr>
+                      <tr><td><h4 class="table-data">##,###</h4></td></tr>
+                      <tr><td><p class="table-data">Milage</p></td></tr>
+                    </table>
+                    <table class="travel-data-table" id="measurement-2">
+                      <tr><td><img id="gas" src="images/gas.svg"></td></tr>
+                      <tr><td><h4 class="table-data">###</h4></td></tr>
+                      <tr><td><p class="table-data">Fuel Range</p></td></tr>
+                    </table>
+                  </div>
+
+                  <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
+                    <table class="travel-data-table" id="measurement-3">
+                      <tr><td><img id="engine" src="images/engine.svg"></td></tr>
+                      <tr><td><h4 class="table-data">Good</h4></td></tr>
+                      <tr><td><p class="table-data">Engine Status</p></td></tr>
+                    </table>
+                    <table class="travel-data-table" id="measurement-4">
+                      <tr><td><img id="tires" src="images/tires.svg"></td></tr>
+                      <tr><td><h4 class="table-data">Fair</h4></td></tr>
+                      <tr><td><p class="table-data">Tire Health</p></td></tr>
+                    </table>
+                  </div>
+
+                </div>
+                <button type="button" class="light-button" href="/dash">Travel Data</button>
+              </div>
+
+              <div class="col-sm-6 col-md-7 col-xs-12 right">
+              <!--Right side Content -->
+              <div class="car-container">
+                <img src="images/prius.png">
+              </div>
+              </div>
+      </div>
+      </div>
+<!--End Desktop Main Content -->
+
+<!--Start responsive Main Content -->
+<div class="col-sm-10 col-sm-offset-2  col-md-10 col-md-offset-2 main" id="hide-desktop-1">
+    <div class="row main-content"id="hide-desktop-2">
+      <div class="col-sm-6 col-md-5 col-xs-12 left"><div class="col-sm-6 col-md-5 col-xs-12 left">
+        <h3 class="left-headline"> Vehicle Health</h3>
+        <div class="maintenance">
+          <p>Next Checkup: 50,000 miles</p>
+          <p>Next State Inspection: May 2017</p>
+        </div>
+
+<!--Start of Data Tables -->
+        <div class="row scrolling-things">
+          <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
+            <table class="travel-data-table" id="measurement-1">
+              <tr><td><img id="miles" src="images/miles.svg"></td></tr>
+              <tr><td><h4 class="table-data">##,###</h4></td></tr>
+              <tr><td><p class="table-data">Milage</p></td></tr>
+            </table>
+            <table class="travel-data-table" id="measurement-2">
+              <tr><td><img id="gas" src="images/gas.svg"></td></tr>
+              <tr><td><h4 class="table-data">###</h4></td></tr>
+              <tr><td><p class="table-data">Fuel Range</p></td></tr>
+            </table>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
+            <table class="travel-data-table" id="measurement-3">
+              <tr><td><img id="engine" src="images/engine.svg"></td></tr>
+              <tr><td><h4 class="table-data">Good</h4></td></tr>
+              <tr><td><p class="table-data">Engine Status</p></td></tr>
+            </table>
+            <table class="travel-data-table" id="measurement-4">
+              <tr><td><img id="tires" src="images/tires.svg"></td></tr>
+              <tr><td><h4 class="table-data">Fair</h4></td></tr>
+              <tr><td><p class="table-data">Tire Health</p></td></tr>
+            </table>
+          </div>
+
+        </div>
+        <button type="button" class="light-button" href"/dash">Travel Data</button>
+      </div>
+</div>
+<!--End responsive main content -->
+
+
+
+
+    </div>
+  </body>
+</html>

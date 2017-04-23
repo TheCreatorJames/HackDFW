@@ -20,10 +20,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/bootstrap-slider.min.js"></script>
 
 
-<link rel="stylesheet" href="main.scss">
 <link rel="stylesheet" href="dash.css">
 <link rel="stylesheet" href="landing.css">
 <link rel="stylesheet" href="vehicleData.css">
+<link rel="stylesheet" href="vehicleDataV2.css">
 
 
 <script src="js/navbar.js"></script>
@@ -102,105 +102,45 @@
   else{}
 </script>
 
-
-<!--Start Desktop Main Content -->
-        <div class="col-sm-10 col-sm-offset-2  col-md-10 col-md-offset-2 main" id="hide-mobile-1">
-            <div class="row main-content"id="hide-mobile-2">
-              <div class="col-sm-6 col-md-5 col-xs-12 left">
-                <h3 class="left-headline"> Vehicle Health</h3>
-                <div class="maintenance">
-                  <p>Next Checkup: 50,000 miles</p>
-                  <p>Next State Inspection: May 2017</p>
-                </div>
-
-  <!--Start of Data Tables -->
-                <div class="row scrolling-things">
-                  <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
-                    <table class="travel-data-table" id="measurement-1">
-                      <tr><td><img id="miles" src="images/miles.svg"></td></tr>
-                      <tr><td><h4 class="table-data">##,###</h4></td></tr>
-                      <tr><td><p class="table-data">Milage</p></td></tr>
-                    </table>
-                    <table class="travel-data-table" id="measurement-2">
-                      <tr><td><img id="gas" src="images/gas.svg"></td></tr>
-                      <tr><td><h4 class="table-data">###</h4></td></tr>
-                      <tr><td><p class="table-data">Fuel Range</p></td></tr>
-                    </table>
-                  </div>
-
-                  <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
-                    <table class="travel-data-table" id="measurement-3">
-                      <tr><td><img id="engine" src="images/engine.svg"></td></tr>
-                      <tr><td><h4 class="table-data">Good</h4></td></tr>
-                      <tr><td><p class="table-data">Engine Status</p></td></tr>
-                    </table>
-                    <table class="travel-data-table" id="measurement-4">
-                      <tr><td><img id="tires" src="images/tires.svg"></td></tr>
-                      <tr><td><h4 class="table-data">Fair</h4></td></tr>
-                      <tr><td><p class="table-data">Tire Health</p></td></tr>
-                    </table>
-                  </div>
-
-                </div>
-                <button type="button" class="light-button" href="/dash">Travel Data</button>
-              </div>
-
-              <div class="col-sm-6 col-md-7 col-xs-12 right">
-              <!--Right side Content -->
-              <div class="car-container">
-                <img src="images/prius.png">
-              </div>
-              </div>
-      </div>
-      </div>
-<!--End Desktop Main Content -->
-
-<!--Start responsive Main Content -->
-<div class="col-sm-10 col-sm-offset-2  col-md-10 col-md-offset-2 main" id="hide-desktop-1">
-    <div class="row main-content"id="hide-desktop-2">
-      <div class="col-sm-6 col-md-5 col-xs-12 left"><div class="col-sm-6 col-md-5 col-xs-12 left">
-        <h3 class="left-headline"> Vehicle Health</h3>
+<div class="col-sm-10 col-sm-offset-2  col-md-10 col-md-offset-2 main">
+    <div class="row main-content">
+      <div class="car-container">
+        <h3 class="headline">Vehicle Health</h3>
         <div class="maintenance">
           <p>Next Checkup: 50,000 miles</p>
           <p>Next State Inspection: May 2017</p>
         </div>
-
-<!--Start of Data Tables -->
-        <div class="row scrolling-things">
-          <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
-            <table class="travel-data-table" id="measurement-1">
-              <tr><td><img id="miles" src="images/miles.svg"></td></tr>
-              <tr><td><h4 class="table-data">##,###</h4></td></tr>
-              <tr><td><p class="table-data">Milage</p></td></tr>
-            </table>
-            <table class="travel-data-table" id="measurement-2">
-              <tr><td><img id="gas" src="images/gas.svg"></td></tr>
-              <tr><td><h4 class="table-data">###</h4></td></tr>
-              <tr><td><p class="table-data">Fuel Range</p></td></tr>
-            </table>
-          </div>
-
-          <div class="col-sm-6 col-md-6 col-xs-6 data-col data-things">
-            <table class="travel-data-table" id="measurement-3">
-              <tr><td><img id="engine" src="images/engine.svg"></td></tr>
-              <tr><td><h4 class="table-data">Good</h4></td></tr>
-              <tr><td><p class="table-data">Engine Status</p></td></tr>
-            </table>
-            <table class="travel-data-table" id="measurement-4">
-              <tr><td><img id="tires" src="images/tires.svg"></td></tr>
-              <tr><td><h4 class="table-data">Fair</h4></td></tr>
-              <tr><td><p class="table-data">Tire Health</p></td></tr>
-            </table>
-          </div>
-
+        <div id="#prius">
+          <img src="images/prius.png">
         </div>
-        <button type="button" class="light-button" href"/dash">Travel Data</button>
       </div>
+            <table class="travel-data-table">
+        <tr>
+          <td><img id="miles" src="images/miles.svg"></td>
+          <td><img id="gas" src="images/gas.svg"></td>
+          ><td><img id="engine" src="images/engine.svg"></td>
+          <td><img id="tires" src="images/tires.svg"></td>
+        </tr>
+        <tr>
+          <td><h4 class="table-data">##,###</h4></td>
+          <td><h4 class="table-data">###</h4></td>
+          <td><h4 class="table-data">Good</h4></td>
+          <td><h4 class="table-data">Fair</h4></td>
+        </tr>
+        <tr>
+          <td><p class="table-data">Total Milage</p></td>
+          <td><p class="table-data">Fuel Range</p></td>
+          <td><p class="table-data">Engine Status</p></td>
+          <td><p class="table-data">Tire Health</p></td>
+        </tr>
+      </table>
+
+      <div class="button-wrapper">
+        <a href="/dash"><button type="button" class="light-button">Travel Data</button></a>
+      </div>
+
+    </div>
 </div>
-<!--End responsive main content -->
-
-
-
 
     </div>
   </body>
