@@ -6,6 +6,8 @@ var lon = [];
 var callbacks = [];
 var brakes = [];
 
+var everything = [];
+
 var arrayOffsets = {};
 var lastSpeed = 0;
 var lastAccel = 0;
@@ -28,13 +30,13 @@ var accelerationSum = 0;
 var minAcceleration = 0;
 var maxAcceleration = 0;
 
+
+
+
+
+
 function init()
 {
-
-
-
-
-
     var fileInput = document.getElementById('fileInput');
 
     fileInput.addEventListener('change', function(e)
@@ -114,10 +116,19 @@ function init()
                     {
                         arrayOffsets['latitude'] = k;
                     }
+                    
                     if (lineVals[k] == 'longitude')
                     {
                         arrayOffsets['longitude'] = k;
                     }
+
+                    [["Fuel_Consum", "fcon"], ["GD_Engine_Temp", "gdt"], ["Steering_Angle_Speed","sat"], ["Hood_Courtesy", "hc"], ["Passenger_AC_Value", "pav"], ["Driver_AC_Value", "dav"], ["Fuel_Guage", "fg"], ["Rear_Fog_Light", "rfl"], ["Lounge_Illum_Light", "lil"], ["Slide_Roof", "sr"], ["Passenger_Window_State", "pws"], ["RR_Window_State", "rrws"], ["RL_Window_State", "rlws"], ["AccelFB", "afb"], ["Inlet_Switch_Indicator", "isi"], ["AC_Blower_Level", "abl"], ["WhilteLine_Left", "wl"], ["LKA_Steering_Support", "lss"], ["WhilteLine_Right", "wr"]].forEach(function(x)
+                    {
+                        if(lineVals[k] == x[0])
+                        {
+                            arrayOffsets[x[1]] = k;
+                        }
+                    });
 
                     if (lineVals[k] == 'Brake_Control_Volume')
                     {
