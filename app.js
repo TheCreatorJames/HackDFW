@@ -148,6 +148,24 @@ app.get("/register", function(req,res)
 });
 
 
+app.get("/health", function(req,res)
+{
+     var sess = initSession(req);
+
+    // If Logged in, Display the Dashboard
+    if(sess.logged)
+    {
+        res.sendFile("html/vehicleData.html");    
+    }
+    else
+    // Otherwise, Display the Home Screen
+    {
+        res.redirect("/")
+    }
+});
+
+
+
 
 app.get("/dash", function(req,res)
 {
