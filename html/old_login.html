@@ -1,0 +1,23 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <script>
+
+        function exec()
+        {
+            var name = document.getElementById("name").value;
+            var pass = document.getElementById("pass").value;
+            window.location.href = "auth/local?username=" + name + "&password=" + pass;
+        }
+
+        </script>
+</head>
+<body>
+    Username <input type="text" id="name" name="username"> <br>
+    Email <input type="email" id="email" name="email"> <br>
+    Password <input type="password" id="pass" name="password">
+
+    <button onclick="exec()">Login</button>
+</body>
+</html>

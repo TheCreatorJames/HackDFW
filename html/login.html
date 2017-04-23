@@ -1,23 +1,32 @@
-<html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-        <script>
-
-        function exec()
-        {
-            var name = document.getElementById("name").value;
-            var pass = document.getElementById("pass").value;
-            window.location.href = "auth/local?username=" + name + "&password=" + pass;
-        }
-
-        </script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toyota Login</title>
+  <!-- bootstrap -->
+<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="login.css">
 </head>
-<body>
-    Username <input type="text" id="name" name="username"> <br>
-    Email <input type="email" id="email" name="email"> <br>
-    Password <input type="password" id="pass" name="password">
 
-    <button onclick="exec()">Login</button>
+<body>
+  <div class="login-body">
+    <div class="branding">
+      <img src="images/logo.svg">
+      <h1>TOYOTA</h1>
+      <h3>working portal name</h3>
+    </div>
+    <div class="login-form">
+      <input type="text" placeholder="Email" class="input-field">
+      <input type="text" placeholder="Password" class="input-field">
+      <button class="submit">Login</button>
+    </div>
+
+  </div>
+
+
 </body>
+
+
 </html>
