@@ -314,16 +314,7 @@ function simulate(q)
         maxAcceleration = acceleration;
     accelerationSum += acceleration;
 
-    /*
-     * Chris's Tone Generation Stuff
-     */
-    //currently working well for up to 136 multiplier
-    if (simulationSecondIndex % 300 === 0)
-    {
-        // instrument.play('CD')
-        // shimmer.play('eg3|beg')
-    }
-    /*END TONE GENERATION BUH BYE*/
+
     simulationSecondIndex++;
     unload();
 
@@ -373,3 +364,10 @@ function simulate(q)
         executeCallbacks();
     }
 }
+
+/*
+ * Chris's Tone Generation Stuff
+ */
+ // setInterval(console.log(getSimulationSecond()),1000)
+setInterval(function (){speedFunc(getSpeed(getSimulationSecond()))},1000);
+/*END TONE GENERATION BUH BYE*/

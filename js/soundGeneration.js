@@ -11,10 +11,10 @@ window.addEventListener('keydown', function (e) {
   console.log(char)
 })
 function speedFunc (currentSpeed) {
-  if(currentSpeed===0){
+  if(currentSpeed==null){
     return
   }else{
-    // console.log(typeof(mystring))
+    console.log(currentSpeed)
     // console.log(typeof({tempo:1000}))
     instrument.play({tempo:Math.floor(100*Math.pow(currentSpeed,1/2))},'fga')
   }
