@@ -56,6 +56,8 @@ function init()
         arrayOffsets = {};
         lastSpeed = 0;
 
+        mut = 0;
+
 
         // simulation variables
         simulationStartIndex = 0;
@@ -93,6 +95,10 @@ function init()
 
                 for (var k = 0; k < lineVals.length; k++)
                 {
+                    if (lineVals[k] == "AccelLR")
+                    {
+                        arrayOffsets["accel"] = k;
+                    }
                     if (lineVals[k] == "Steering_Angle_Degree" || lineVals[k] == "Streering_Angle_Degree")
                     {
                         arrayOffsets["angle"] = k;
@@ -135,19 +141,6 @@ function init()
                         {
                             if(f)
                             setTimeout(asyncRead, 100);
-                            break;
-                        }
-                    }
-
-                    count = 0;
-
-                    // calculate acceleration
-                    for (j = j; j < DATA_COUNT; j++)
-                    {
-                        acceleration.push(speed[getPosition(j)] - speed[getPosition(j - 1)]);
-
-                        if (count++ == MAX_COUNT)
-                        {
                             break;
                         }
                     }
@@ -280,9 +273,7 @@ function parseLine(data)
 
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
-
-
-
+    acceleration.push(parseFloat(tokens[arrayOffsets["accel"]]));
     speed.push(lastSpeed);
     steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
     lat.push(parseFloat(tokens[arrayOffsets['latitude']]));
