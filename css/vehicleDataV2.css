@@ -29,9 +29,36 @@
     margin-top: 150px;
   }
   .button-wrapper{
-    display:inherit;
+    display:flex;
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 30px;
   }
   .car-container img{
     margin-bottom: 20px;
   }
+  .travel-data-table{
+    display: inline-table;
+    padding: 0;
+    margin-right: 10px;
+    margin-left: 10px;
+    width:80%;
+  }
+}
+
+#prius{
+  width: 40%;
+  margin: 0 auto;
+}
+#prius img{
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+.main-container{
+  margin-top: 50px;
+}
+.button-wrapper a{
+  margin: 0 auto;
+  padding-top: 30px;
 }

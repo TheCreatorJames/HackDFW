@@ -40,4 +40,9 @@
   vertical-align: middle;
   display: table-cell;
   text-align: center;
+  margin: 0 auto;
+}
+.light-button{
+  display: block;
+  margin: 0 auto;
 }
