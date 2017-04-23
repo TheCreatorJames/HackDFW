@@ -66,16 +66,17 @@ app.get("/", function(req, res)
 {
     var sess = initSession(req);
 
+    console.log("What the fuck");
     // If Logged in, Display the Dashboard
     if(sess.logged)
     {
         
-        res.sendfile("travelData.html");    
+        res.sendfile("html/travelData.html");    
     }
     else
     // Otherwise, Display the Home Screen
     {
-        res.sendfile("login.html");
+        res.sendfile("html/login.html");
     }
 });
 
