@@ -371,6 +371,6 @@ function simulate(q)
  // setInterval(console.log(getSimulationSecond()),1000)
 setInterval(function (){
   speedFunc(getSpeed(getSimulationSecond()))
-  
+  bassFunc(getSpeed(getSimulationSecond()))
 },1000);
 /*END TONE GENERATION BUH BYE*/

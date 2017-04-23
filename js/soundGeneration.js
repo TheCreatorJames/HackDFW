@@ -7,10 +7,11 @@ var abcCPenta = ['C,', 'D', 'E', 'G', 'A', 'C\'']
 
 
 var shimmer = new Instrument({wave: 'sawtooth', cutoff: 1000, release: 4, detune: 0})
-
+var chords = new Instrument({wave: 'piano', release: 2, cutoff:1000, detune: 0})
+var chordNotes = ['[C,E]', '[C,E]', '[D,F]']
 window.addEventListener('keydown', function (e) {
   var char = abcCPenta[Math.floor((Math.random() * 6))]
-  bass.play(bassNotes[Math.floor((Math.random() * 3))])
+  chords.play(chordNotes[Math.floor((Math.random() * 3))])
 })
 function speedFunc (currentSpeed) {
   if(currentSpeed==null){
@@ -21,8 +22,22 @@ function speedFunc (currentSpeed) {
     instrument.play({tempo:Math.floor(100*Math.pow(currentSpeed,1/2))},'fga')
   }
 }
-function bassFunc(moduloValue){
+function bassFunc(currentSpeed){
+  if(currentSpeed==null){
+    return
+  }else{
   var bassNotes = ['C,', 'F,', 'G,']
   var bass = new Instrument({wave: 'sine', release: 2, cutoff:1000, detune: 0})
   bass.play(bassNotes[Math.floor((Math.random() * 3))])
+}
+}
+
+function chordstabs(currentSpeed){
+  if(currentSpeed==null){
+    return
+  }else{
+  var chordNotes = ['C,', 'D,', 'G,']
+  var chords = new Instrument({wave: 'piano', release: 2, cutoff:1000, detune: 0})
+  bass.play(bassNotes[Math.floor((Math.random() * 3))])
+}
 }
