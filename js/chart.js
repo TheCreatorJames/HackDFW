@@ -43,8 +43,8 @@ var accelerationOptions = {
             display: true,
             ticks:
             {
-                min: -10, // minimum will be 0, unless there is a lower value.
-                max: 10,
+                min: -5, // minimum will be 0, unless there is a lower value.
+                max: 5,
             }
         }]
     }

@@ -8,6 +8,7 @@ var brakes = [];
 
 var arrayOffsets = {};
 var lastSpeed = 0;
+var lastAccel = 0;
 
 var simulationSpeed = 10;
 var simSpeedSkips = 1;
@@ -273,7 +274,12 @@ function parseLine(data)
 
     if (tokens[arrayOffsets["speed"]].length != 0)
         lastSpeed = parseFloat(tokens[arrayOffsets["speed"]]);
-    acceleration.push(parseFloat(tokens[arrayOffsets["accel"]]));
+
+ if (tokens[arrayOffsets["accel"]].length != 0)
+        lastAccel = parseFloat(tokens[arrayOffsets["accel"]]);
+
+    acceleration.push(lastAccel);
+    
     speed.push(lastSpeed);
     steeringWheel.push(parseFloat(tokens[arrayOffsets["angle"]]));
     lat.push(parseFloat(tokens[arrayOffsets['latitude']]));
