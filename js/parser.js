@@ -56,6 +56,8 @@ function init()
         arrayOffsets = {};
         lastSpeed = 0;
 
+        mut = 0;
+
 
         // simulation variables
         simulationStartIndex = 0;
