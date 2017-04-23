@@ -1,0 +1,27 @@
+.car-container{
+  margin-top: 50px;
+}
+
+.car-container img{
+  width: 50%;
+  margin: 50px;
+}
+.car-container .headline{
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #c00000;
+}
+
+@media(max-width: 767px){
+  .main{
+    margin-top: 150px;
+  }
+  .button-wrapper{
+    display:inherit;
+  }
+  .car-container img{
+    margin-bottom: 20px;
+  }
+}
