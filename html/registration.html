@@ -14,17 +14,17 @@
       crossorigin="anonymous"></script>
 
 
+
  <script>
 
         function exec()
         {
             var name = document.getElementById("name").value;
             var pass = document.getElementById("pass").value;
-            window.location.href = "auth/local?username=" + name + "&password=" + pass;
+            window.location.href = "auth/local/register?username=" + name + "&password=" + pass;
         }
 
         </script>
-
 <link rel="stylesheet" href="login.css">
 </head>
 
@@ -38,7 +38,7 @@
     <div class="login-form">
       <input type="text" placeholder="Username" class="input-field">
       <input type="text" placeholder="Password" class="input-field">
-      <button class="submit" onclick="exec()">Login</button>
+      <button class="submit" onclick="exec()">Register</button>
     </div>
 
   </div>

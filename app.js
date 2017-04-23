@@ -13,6 +13,7 @@ require("./app_user_methods.js")(users, bcrypt);
 
 GetOrAddUser("Jesse", "Jesse", "jesse", "password", function() {});
 
+
 // Init App
 var app = express();
 
@@ -86,6 +87,30 @@ app.get("/auth/local", function(req, res)
 
 });
 
+app.get("/auth/local/register", function(req, res)
+{
+    var sess = initSession(req);
+    var name = req.param('username');
+    var pass = req.param('password');
+
+    AddUser(name, name, "", pass, function(err, doc)
+    {
+        if(!err)
+        {
+            sess.logged = true;
+            sess.username = doc.username;
+            res.redirect("/");
+        }
+        else
+        {
+            res.redirect("/register");
+        }
+    });
+
+
+
+});
+
 
 app.get("/login", function(req,res)
 {
@@ -101,6 +126,24 @@ app.get("/login", function(req,res)
     // Otherwise, Display the Home Screen
     {
         res.sendfile("html/login.html");
+    }
+});
+
+
+app.get("/register", function(req,res)
+{
+     var sess = initSession(req);
+
+    // If Logged in, Display the Dashboard
+    if(sess.logged)
+    {
+        
+     res.redirect("/");    
+    }
+    else
+    // Otherwise, Display the Home Screen
+    {
+        res.sendfile("html/register.html");
     }
 });
 
